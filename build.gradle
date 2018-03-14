@@ -1,0 +1,69 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.6.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        maven { url 'http://10.164.194.139:8081/nexus/content/repositories/public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+group 'com.dreamer'
+version '1.0-SNAPSHOT'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url 'http://10.164.194.139:8081/nexus/content/repositories/public/' }
+    mavenCentral()
+}
+
+springBoot {
+    classifier = 'exec'
+}
+//将mapping文件夹加载到resources
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDirs 'src/main/java'
+        }
+    }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-configuration-processor")
+    //spring-aop AspectJ
+    compile("org.springframework.boot:spring-boot-starter-aop")
+    //将spring data repository 暴露为rest形式的服务
+    compile('org.springframework.boot:spring-boot-starter-data-rest')
+    //oracle
+    compile("com.oracle:ojdbc6:11g")
+    //redis
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
+    //druid
+    compile("com.alibaba:druid:1.0.26")
+    //Mybatis
+    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0')
+    //web 包含 Tomcat 和 spring-mvc
+    compile('org.springframework.boot:spring-boot-starter-web')
+    //dom4j
+    compile group: 'dom4j', name: 'dom4j'
+    //log4j
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
+    //json 处理
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.38'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

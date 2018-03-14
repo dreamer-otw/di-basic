@@ -1,0 +1,29 @@
+server:
+  port: 8081
+  contextPath: /di-basic
+  maxHttpPostSize: 51200000
+logging:
+  file: log\di-basic.log
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@10.164.197.235:1521:act
+    username: act
+    password: act123
+    druid:
+      min-idle: 5
+      max-active: 15
+      initial-size: 2
+      min-evictable-idle-time-millis: 300000
+      max-wait: 60000
+mybatis:
+  mapper-locations: classpath*:com/haiercash/diplatform/**/mapping/*.xml
+  dialect: org.apache.ibatis.dialect.OracleDialect
+  bbase-package: com.haiercash.diplatform.**.dao
+  aliases-package: com.haiercash.diplatform.**.entity,com.haiercash.diplatform.**.data
+  underscore-to-camel-case: true
+############################# 分割线  #############################################
+
+
+
