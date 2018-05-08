@@ -15,14 +15,14 @@
 
         <!--数据库基本信息-->
         <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-                        connectionURL="jdbc:oracle:thin:@10.164.197.235:1521:act"
-                        userId="act"
-                        password="act123">
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
+                        userId="basic"
+                        password="123456">
         </jdbcConnection>
 
         <!--生成实体类的位置以及包的名字-->
         <!--同样Mac用户：targetProject 为全路径-->
-        <javaModelGenerator targetPackage="com.dreamer.basic.common.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.dreamer.basic.common.generator.entity" targetProject="src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="true" />
             <!-- 从数据库返回的值被清理前后的空格 -->
@@ -31,14 +31,14 @@
 
         <!--生成映射文件存放位置-->
         <!--同样Mac用户：targetProject 为全路径-->
-        <sqlMapGenerator targetPackage="com.dreamer.basic.common.mapping" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="com.dreamer.basic.common.generator.mapping" targetProject="src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!--生成Dao类存放位置,mapper接口生成的位置-->
         <!--同样Mac用户：targetProject 为全路径-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dreamer.basic.common.dao" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dreamer.basic.common.generator.dao" targetProject="src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
@@ -46,11 +46,30 @@
         <!-- 配置表信息 -->
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
-        <table tableName="SYS_USER"
+        <!--<table tableName="SYS_USER"
                domainObjectName="SysUser" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
+        </table>-->
+        <table tableName="SYS_USER">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <!--<generatedKey column="uuid" sqlStatement="select sys_guid() from dual" identity="false"/>-->
         </table>
-
+        <table tableName="SYS_ROLE">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="ROLE_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="SYS_MENU">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="MENU_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="SYS_USER_ROLE">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="NEXUS_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="SYS_ROLE_MENU">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="NEXUS_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
     </context>
 </generatorConfiguration>
