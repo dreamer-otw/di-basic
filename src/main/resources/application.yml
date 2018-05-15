@@ -18,10 +18,10 @@ spring:
       min-evictable-idle-time-millis: 300000
       max-wait: 60000
 mybatis:
-  mapper-locations: classpath*:com/haiercash/diplatform/**/mapping/*.xml
+  mapper-locations: classpath*:com/dreamer/basic/**/mapping/*.xml
   dialect: org.apache.ibatis.dialect.OracleDialect
-  bbase-package: com.haiercash.diplatform.**.dao
-  aliases-package: com.haiercash.diplatform.**.entity,com.haiercash.diplatform.**.data
+  bbase-package: com.dreamer.basic.**.dao
+  aliases-package: com.dreamer.basic.**.entity,com.dreamer.basic.**.data
   underscore-to-camel-case: true
 ############################# 分割线  #############################################
 

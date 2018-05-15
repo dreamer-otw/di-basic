@@ -53,7 +53,7 @@
         </table>-->
         <table tableName="SYS_USER">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
-            <!--<generatedKey column="uuid" sqlStatement="select sys_guid() from dual" identity="false"/>-->
+            <generatedKey column="USER_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
         </table>
         <table tableName="SYS_ROLE">
             <property name="ignoreQualifiersAtRuntime" value="true"/>

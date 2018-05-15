@@ -3,11 +3,13 @@
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysUserMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysUser">
     <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_ACCOUNT" jdbcType="VARCHAR" property="userAccount" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
     <result column="USER_ALIAS" jdbcType="VARCHAR" property="userAlias" />
     <result column="USER_PWD" jdbcType="VARCHAR" property="userPwd" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
-    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
     <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    USER_ID, USER_ALIAS, USER_PWD, EMAIL, MOBILE, STATUS, CREATE_TIME
+    USER_ID, USER_ACCOUNT, USERNAME, USER_ALIAS, USER_PWD, EMAIL, MOBILE, STATUS, CREATE_TIME
   </sql>
   <select id="selectByExample" parameterType="com.dreamer.basic.common.generator.entity.SysUserExample" resultMap="BaseResultMap">
     select
@@ -102,18 +104,30 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.dreamer.basic.common.generator.entity.SysUser">
-    insert into SYS_USER (USER_ID, USER_ALIAS, USER_PWD, 
-      EMAIL, MOBILE, STATUS, 
-      CREATE_TIME)
-    values (#{userId,jdbcType=VARCHAR}, #{userAlias,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
-      #{createTime,jdbcType=VARCHAR})
+    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into SYS_USER (USER_ID, USER_ACCOUNT, USERNAME, 
+      USER_ALIAS, USER_PWD, EMAIL, 
+      MOBILE, STATUS, CREATE_TIME
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userAlias,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dreamer.basic.common.generator.entity.SysUser">
+    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
     insert into SYS_USER
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        USER_ID,
+      USER_ID,
+      <if test="userAccount != null">
+        USER_ACCOUNT,
+      </if>
+      <if test="username != null">
+        USERNAME,
       </if>
       <if test="userAlias != null">
         USER_ALIAS,
@@ -135,8 +149,12 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+      #{userId,jdbcType=VARCHAR},
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="userAlias != null">
         #{userAlias,jdbcType=VARCHAR},
@@ -151,7 +169,7 @@
         #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=DECIMAL},
+        #{status,jdbcType=CHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=VARCHAR},
@@ -170,6 +188,12 @@
       <if test="record.userId != null">
         USER_ID = #{record.userId,jdbcType=VARCHAR},
       </if>
+      <if test="record.userAccount != null">
+        USER_ACCOUNT = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
       <if test="record.userAlias != null">
         USER_ALIAS = #{record.userAlias,jdbcType=VARCHAR},
       </if>
@@ -183,7 +207,7 @@
         MOBILE = #{record.mobile,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
-        STATUS = #{record.status,jdbcType=DECIMAL},
+        STATUS = #{record.status,jdbcType=CHAR},
       </if>
       <if test="record.createTime != null">
         CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
@@ -196,11 +220,13 @@
   <update id="updateByExample" parameterType="map">
     update SYS_USER
     set USER_ID = #{record.userId,jdbcType=VARCHAR},
+      USER_ACCOUNT = #{record.userAccount,jdbcType=VARCHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
       USER_ALIAS = #{record.userAlias,jdbcType=VARCHAR},
       USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
       EMAIL = #{record.email,jdbcType=VARCHAR},
       MOBILE = #{record.mobile,jdbcType=VARCHAR},
-      STATUS = #{record.status,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=CHAR},
       CREATE_TIME = #{record.createTime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -209,6 +235,12 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.basic.common.generator.entity.SysUser">
     update SYS_USER
     <set>
+      <if test="userAccount != null">
+        USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
       <if test="userAlias != null">
         USER_ALIAS = #{userAlias,jdbcType=VARCHAR},
       </if>
@@ -222,7 +254,7 @@
         MOBILE = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        STATUS = #{status,jdbcType=DECIMAL},
+        STATUS = #{status,jdbcType=CHAR},
       </if>
       <if test="createTime != null">
         CREATE_TIME = #{createTime,jdbcType=VARCHAR},
@@ -232,11 +264,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysUser">
     update SYS_USER
-    set USER_ALIAS = #{userAlias,jdbcType=VARCHAR},
+    set USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      USER_ALIAS = #{userAlias,jdbcType=VARCHAR},
       USER_PWD = #{userPwd,jdbcType=VARCHAR},
       EMAIL = #{email,jdbcType=VARCHAR},
       MOBILE = #{mobile,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=CHAR},
       CREATE_TIME = #{createTime,jdbcType=VARCHAR}
     where USER_ID = #{userId,jdbcType=VARCHAR}
   </update>

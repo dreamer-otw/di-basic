@@ -1,6 +1,7 @@
-package com.dreamer.basic.backstage.sys.utils;
+package com.dreamer.basic.backstage.sys.Exception;
 
 import com.alibaba.fastjson.JSON;
+import com.dreamer.basic.backstage.sys.utils.R;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 异常处理器
- * @author R & D
- * @email 908350381@qq.com
- * @date 2016年10月27日 下午10:16:19
+ * > 异常处理器
+ * author : dreamer
+ * email : dreamers_otw@163.com
+ * date : 2018/5/14 15:13
  */
 @Component
 public class RRExceptionHandler implements HandlerExceptionResolver {

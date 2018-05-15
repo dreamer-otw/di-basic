@@ -11,7 +11,7 @@ public class SysMenu implements Serializable {
 
     private String menuUrl;
 
-    private Short menuType;
+    private String menuType;
 
     private String icon;
 
@@ -51,12 +51,12 @@ public class SysMenu implements Serializable {
         this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
-    public Short getMenuType() {
+    public String getMenuType() {
         return menuType;
     }
 
-    public void setMenuType(Short menuType) {
-        this.menuType = menuType;
+    public void setMenuType(String menuType) {
+        this.menuType = menuType == null ? null : menuType.trim();
     }
 
     public String getIcon() {

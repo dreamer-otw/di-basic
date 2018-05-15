@@ -1,10 +1,10 @@
-package com.dreamer.basic.backstage.sys.utils;
+package com.dreamer.basic.backstage.sys.Exception;
 
 /**
- * 自定义异常
- * @author R & D
- * @email 908350381@qq.com
- * @date 2016年10月27日 下午10:11:27
+ * > 自定义异常
+ * author : dreamer
+ * email : dreamers_otw@163.com
+ * date : 2018/5/14 15:13
  */
 public class RRException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

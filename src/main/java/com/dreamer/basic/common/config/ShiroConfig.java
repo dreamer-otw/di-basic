@@ -13,9 +13,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 import java.util.LinkedHashMap;
-
+/**
+ * > Shiro 配置
+ * author : dreamer
+ * email : dreamers_otw@163.com
+ * date : 2018/5/15 10:12
+ */
 @Configuration
 public class ShiroConfig {
+    /* 拦截器 */
     @Bean(name="shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager manager) {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
@@ -27,8 +33,6 @@ public class ShiroConfig {
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/statics/**", "anon"); //表示可以匿名访问
-        filterChainDefinitionMap.put("/dep/**", "anon"); //表示可以匿名访问
-        filterChainDefinitionMap.put("/upload/**","anon");//表示可以匿名访问
         filterChainDefinitionMap.put("/login.html", "anon");
         filterChainDefinitionMap.put("/sys/login","anon");
         filterChainDefinitionMap.put("/captcha.jpg","anon");

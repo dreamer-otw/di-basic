@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysRoleMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysRole">
-    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
     <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
     <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
@@ -82,6 +82,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_ROLE
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysRoleExample">
     delete from SYS_ROLE
     <if test="_parameter != null">
@@ -162,5 +172,27 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
+    update SYS_ROLE
+    <set>
+      <if test="roleName != null">
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
+    update SYS_ROLE
+    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
   </update>
 </mapper>

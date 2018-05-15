@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Controller公共组件
- * @author R & D
- * @email 908350381@qq.com
- * @date 2016年11月9日 下午9:42:26
+ * > Controller 公共组件
+ * author : dreamer
+ * email : dreamers_otw@163.com
+ * date : 2018/5/13 12:13
  */
 public abstract class AbstractController {
 	protected Logger logger = LoggerFactory.getLogger(getClass());

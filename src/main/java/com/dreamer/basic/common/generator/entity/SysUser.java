@@ -5,6 +5,10 @@ import java.io.Serializable;
 public class SysUser implements Serializable {
     private String userId;
 
+    private String userAccount;
+
+    private String username;
+
     private String userAlias;
 
     private String userPwd;
@@ -13,7 +17,7 @@ public class SysUser implements Serializable {
 
     private String mobile;
 
-    private Short status;
+    private String status;
 
     private String createTime;
 
@@ -25,6 +29,22 @@ public class SysUser implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
+    }
+
+    public String getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount == null ? null : userAccount.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getUserAlias() {
@@ -59,12 +79,12 @@ public class SysUser implements Serializable {
         this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public Short getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Short status) {
-        this.status = status;
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getCreateTime() {

@@ -4,6 +4,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+/**
+ * > WebMvc 配置
+ * author : dreamer
+ * email : dreamers_otw@163.com
+ * date : 2018/5/15 19:12
+ */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override

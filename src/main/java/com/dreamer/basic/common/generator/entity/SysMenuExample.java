@@ -394,52 +394,62 @@ public class SysMenuExample {
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeEqualTo(Short value) {
+        public Criteria andMenuTypeEqualTo(String value) {
             addCriterion("MENU_TYPE =", value, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeNotEqualTo(Short value) {
+        public Criteria andMenuTypeNotEqualTo(String value) {
             addCriterion("MENU_TYPE <>", value, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeGreaterThan(Short value) {
+        public Criteria andMenuTypeGreaterThan(String value) {
             addCriterion("MENU_TYPE >", value, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeGreaterThanOrEqualTo(Short value) {
+        public Criteria andMenuTypeGreaterThanOrEqualTo(String value) {
             addCriterion("MENU_TYPE >=", value, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeLessThan(Short value) {
+        public Criteria andMenuTypeLessThan(String value) {
             addCriterion("MENU_TYPE <", value, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeLessThanOrEqualTo(Short value) {
+        public Criteria andMenuTypeLessThanOrEqualTo(String value) {
             addCriterion("MENU_TYPE <=", value, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeIn(List<Short> values) {
+        public Criteria andMenuTypeLike(String value) {
+            addCriterion("MENU_TYPE like", value, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeNotLike(String value) {
+            addCriterion("MENU_TYPE not like", value, "menuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuTypeIn(List<String> values) {
             addCriterion("MENU_TYPE in", values, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeNotIn(List<Short> values) {
+        public Criteria andMenuTypeNotIn(List<String> values) {
             addCriterion("MENU_TYPE not in", values, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeBetween(Short value1, Short value2) {
+        public Criteria andMenuTypeBetween(String value1, String value2) {
             addCriterion("MENU_TYPE between", value1, value2, "menuType");
             return (Criteria) this;
         }
 
-        public Criteria andMenuTypeNotBetween(Short value1, Short value2) {
+        public Criteria andMenuTypeNotBetween(String value1, String value2) {
             addCriterion("MENU_TYPE not between", value1, value2, "menuType");
             return (Criteria) this;
         }

@@ -6,10 +6,10 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 /**
- * Shiro工具类
- * @author R & D
- * @email 908350381@qq.com
- * @date 2016年11月12日 上午9:49:19
+ * > Shiro 工具类
+ * author : dreamer
+ * email : dreamers_otw@163.com
+ * date : 2018/5/15
  */
 public class ShiroUtils {
 	public static Session getSession() {

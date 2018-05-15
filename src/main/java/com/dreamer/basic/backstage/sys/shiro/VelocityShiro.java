@@ -3,11 +3,11 @@ package com.dreamer.basic.backstage.sys.shiro;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
-/**
- * Shiro权限标签(Velocity版)
- * @author R & D
- * @email 908350381@qq.com
- * @date 2016年12月3日 下午11:32:47
+ /**
+ * > Shiro权限标签
+ * author : dreamer
+ * email : dreamers_otw@163.com
+ * date : 2018/5/14 15:13
  */
 public class VelocityShiro {
 	/**

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysRoleMenuMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysRoleMenu">
-    <result column="NEXUS_ID" jdbcType="VARCHAR" property="nexusId" />
+    <id column="NEXUS_ID" jdbcType="VARCHAR" property="nexusId" />
     <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
     <result column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
   </resultMap>
@@ -81,6 +81,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE_MENU
+    where NEXUS_ID = #{nexusId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_ROLE_MENU
+    where NEXUS_ID = #{nexusId,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysRoleMenuExample">
     delete from SYS_ROLE_MENU
     <if test="_parameter != null">
@@ -151,5 +161,23 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.basic.common.generator.entity.SysRoleMenu">
+    update SYS_ROLE_MENU
+    <set>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null">
+        MENU_ID = #{menuId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NEXUS_ID = #{nexusId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysRoleMenu">
+    update SYS_ROLE_MENU
+    set ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      MENU_ID = #{menuId,jdbcType=VARCHAR}
+    where NEXUS_ID = #{nexusId,jdbcType=VARCHAR}
   </update>
 </mapper>

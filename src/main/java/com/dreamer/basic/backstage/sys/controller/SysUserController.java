@@ -1,3 +1,4 @@
+/*
 package com.dreamer.basic.backstage.sys.controller;
 
 import com.sys.repository.entity.SysUserEntity;
@@ -22,12 +23,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * 系统用户
  * @author R & D
  * @email 908350381@qq.com
  * @date 2016年10月31日 上午10:40:10
- */
+ *//*
+
 @RestController
 @RequestMapping("/sys/user")
 public class SysUserController extends AbstractController {
@@ -38,9 +41,11 @@ public class SysUserController extends AbstractController {
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
 
-	/**
+	*/
+/**
 	 * 所有用户列表
-	 */
+	 *//*
+
 	@RequestMapping("/list")
 	@RequiresPermissions("sys:user:list")
 	public R list(Integer page, Integer limit) {
@@ -57,17 +62,21 @@ public class SysUserController extends AbstractController {
 		return R.ok().put("page", pageUtil);
 	}
 
-	/**
+	*/
+/**
 	 * 获取登录的用户信息
-	 */
+	 *//*
+
 	@RequestMapping("/info")
 	public R info() {
 		return R.ok().put("user", getUser());
 	}
 
-	/**
+	*/
+/**
 	 * 修改登录用户密码
-	 */
+	 *//*
+
 	@RequestMapping("/password")
 	public R password(String password, String newPassword) {
 		if (StringUtils.isBlank(newPassword)) {
@@ -91,9 +100,11 @@ public class SysUserController extends AbstractController {
 		return R.ok();
 	}
 
-	/**
+	*/
+/**
 	 * 用户信息
-	 */
+	 *//*
+
 	@RequestMapping("/info/{userId}")
 	@RequiresPermissions("sys:user:info")
 	public R info(@PathVariable("userId") String userId) {
@@ -106,9 +117,11 @@ public class SysUserController extends AbstractController {
 		return R.ok().put("user", user);
 	}
 
-	/**
+	*/
+/**
 	 * 保存用户
-	 */
+	 *//*
+
 	@RequestMapping("/save")
 	@RequiresPermissions("sys:user:save")
 	public R save(@RequestBody SysUserEntity user) {
@@ -129,9 +142,11 @@ public class SysUserController extends AbstractController {
 		return R.ok();
 	}
 
-	/**
+	*/
+/**
 	 * 修改用户
-	 */
+	 *//*
+
 	@RequestMapping("/update")
 	@RequiresPermissions("sys:user:update")
 	public R update(@RequestBody SysUserEntity user) {
@@ -148,9 +163,11 @@ public class SysUserController extends AbstractController {
 		return R.ok();
 	}
 
-	/**
+	*/
+/**
 	 * 删除用户
-	 */
+	 *//*
+
 	@RequestMapping("/delete")
 	@RequiresPermissions("sys:user:delete")
 	public R delete(@RequestBody String[] userIds) {
@@ -173,3 +190,4 @@ public class SysUserController extends AbstractController {
 		return R.ok();
 	}
 }
+*/
