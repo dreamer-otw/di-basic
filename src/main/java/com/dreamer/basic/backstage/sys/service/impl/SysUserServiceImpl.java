@@ -39,8 +39,8 @@ public class SysUserServiceImpl implements SysUserService{
         return null;
         }
 
-@Override
-public SysUser getUserByUsername(String username) {
+    @Override
+    public SysUser getUserByUsername(String username) {
         SysUserExample sysUserExample = new SysUserExample();
         sysUserExample.createCriteria().andUsernameEqualTo(username).andUsernameIsNotNull();
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
