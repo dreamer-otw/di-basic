@@ -13,6 +13,5 @@ import java.util.List;
  */
 @Service
 public interface SysMenuService {
-    //根据用户id获取菜单集合
-    List<SysMenu> getMenuListByUserId(String userId);
+
 }

@@ -32,12 +32,12 @@ var vm = new Vue({
 	},
 	methods: {
 		getMenuList: function (event) {
-			$.getJSON("sys/menu/user?_"+$.now(), function(r){
+			$.getJSON("sys/menuList?_"+$.now(), function(r){
 				vm.menuList = r.menuList;
 			});
 		},
 		getUser: function(){
-			$.getJSON("sys/user/info?_"+$.now(), function(r){
+			$.getJSON("sys/userInfo?_"+$.now(), function(r){
 				vm.user = r.user;
 			});
 		},
@@ -54,7 +54,7 @@ var vm = new Vue({
 					var data = "password="+vm.password+"&newPassword="+vm.newPassword;
 					$.ajax({
 						type: "POST",
-					    url: "sys/user/password",
+					    url: "sys/update/password",
 					    data: data,
 					    dataType: "json",
 					    success: function(result){

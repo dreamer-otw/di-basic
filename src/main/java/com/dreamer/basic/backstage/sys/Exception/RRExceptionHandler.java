@@ -1,7 +1,7 @@
 package com.dreamer.basic.backstage.sys.Exception;
 
 import com.alibaba.fastjson.JSON;
-import com.dreamer.basic.backstage.sys.utils.R;
+import com.dreamer.basic.backstage.sys.utils.Result;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class RRExceptionHandler implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-		R r = new R();
+		Result r = new Result();
 		try {
 			response.setContentType("application/json;charset=utf-8");
 			response.setCharacterEncoding("utf-8");
@@ -34,11 +34,11 @@ public class RRExceptionHandler implements HandlerExceptionResolver {
 				r.put("code", ((RRException) ex).getCode());
 				r.put("msg", ((RRException) ex).getMessage());
 			} else if (ex instanceof DuplicateKeyException) {
-				r = R.error("数据库中已存在该记录");
+				r = Result.error("数据库中已存在该记录");
 			} else if (ex instanceof AuthorizationException) {
-				r = R.error("没有权限，请联系管理员授权");
+				r = Result.error("没有权限，请联系管理员授权");
 			} else {
-				r = R.error();
+				r = Result.error();
 			}
 
 			// 记录异常日志

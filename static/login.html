@@ -32,7 +32,7 @@
         <h4 style="margin-bottom: 0px;"><i class="fa fa-exclamation-triangle"></i> {{errorMsg}}</h4>
       </div>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" v-model="username" placeholder="账号">
+        <input type="text" class="form-control" v-model="userAccount" placeholder="账号">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -67,15 +67,11 @@
 <!-- /.login-box -->
 <script src="statics/libs/jquery.min.js"></script>
 <script src="statics/libs/vue.min.js"></script>
-<script src="statics/libs/bootstrap.min.js"></script>
-<script src="statics/libs/jquery.slimscroll.min.js"></script>
-<script src="statics/libs/fastclick.min.js"></script>
-<script src="statics/libs/app.js"></script>
 <script type="text/javascript">
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
-		username: '',
+		userAccount: '',
 		password: '',
 		captcha: '',
 		error: false,
@@ -92,20 +88,19 @@ var vm = new Vue({
 			this.src = "captcha.jpg?t=" + $.now();
 		},
 		login: function (event) {
-			var data = "username="+vm.username+"&password="+vm.password+"&captcha="+vm.captcha;
+			var data = "userAccount="+vm.userAccount+"&password="+vm.password+"&captcha="+vm.captcha;
 			$.ajax({
 				type: "POST",
 			    url: "sys/login",
 			    data: data,
 			    dataType: "json",
 			    success: function(result){
-					if(result.code == 0){//登录成功
-						parent.location.href ='index.html';
-					}else{
+					if(result.code == 0) {//成功
+                        parent.location.href ='index.html';
+					} else {
 						vm.error = true;
 						vm.errorMsg = result.msg;
-						
-						vm.refreshCode();
+                        vm.refreshCode();
 					}
 				}
 			});
@@ -113,5 +108,9 @@ var vm = new Vue({
 	}
 });
 </script>
+<script src="statics/libs/bootstrap.min.js"></script>
+<script src="statics/libs/jquery.slimscroll.min.js"></script>
+<script src="statics/libs/fastclick.min.js"></script>
+<script src="statics/libs/app.js"></script>
 </body>
 </html>

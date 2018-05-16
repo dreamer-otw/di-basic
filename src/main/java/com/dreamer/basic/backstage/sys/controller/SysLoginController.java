@@ -1,14 +1,15 @@
 package com.dreamer.basic.backstage.sys.controller;
-
-import com.dreamer.basic.backstage.sys.utils.R;
+import com.dreamer.basic.backstage.sys.data.SysMenuData;
+import com.dreamer.basic.backstage.sys.service.SysLoginService;
+import com.dreamer.basic.backstage.sys.utils.Result;
 import com.dreamer.basic.backstage.sys.utils.ShiroUtils;
+import com.dreamer.basic.common.generator.entity.SysUser;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
@@ -17,6 +18,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
+
 
 /**
  * > 登陆
@@ -28,6 +31,8 @@ import java.io.IOException;
 public class SysLoginController extends AbstractController{
 	@Autowired
 	private Producer producer;
+	@Autowired
+	private SysLoginService sysLoginService;
 
 	/**
 	 * 处理验证码
@@ -52,34 +57,74 @@ public class SysLoginController extends AbstractController{
 	 * 登录
 	 */
 	@PostMapping(value = "/sys/login")
-	public R login(String username, String password, String captcha) throws IOException {
+	public Result login(String userAccount, String password, String captcha) throws IOException {
 		String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
 		if (!captcha.equalsIgnoreCase(kaptcha)) {
-			return R.error("验证码不正确");
+			return Result.error(00001, "验证码不正确");
 		}
 		try {
 			Subject subject = ShiroUtils.getSubject();
 			// sha256加密
 			password = new Sha256Hash(password).toHex();
-			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+			UsernamePasswordToken token = new UsernamePasswordToken(userAccount, password);
 			subject.login(token);
 		} catch (UnknownAccountException e) {
-			return R.error(e.getMessage());
+			return Result.error(e.getMessage());
 		} catch (IncorrectCredentialsException e) {
-			return R.error(e.getMessage());
+			return Result.error(e.getMessage());
 		} catch (LockedAccountException e) {
-			return R.error(e.getMessage());
+			return Result.error(e.getMessage());
 		} catch (AuthenticationException e) {
-			return R.error("账户验证失败");
+			return Result.error("账户验证失败");
 		}
-		return R.ok();
+		return Result.ok();
 	}
+
 	/**
 	 * 退出
 	 */
 	@GetMapping(value = "logout")
-	public String logout() {
+	public void logout(HttpServletResponse response) throws IOException {
 		ShiroUtils.logout();
-		return "redirect:login.html";
+		response.sendRedirect("login.html");
+	}
+
+	/**
+	 * 获取菜单list
+	 */
+	@GetMapping("/sys/menuList")
+	public Result getMenuList() {
+		List<SysMenuData> menuList = sysLoginService.getMenuListByUserId(getUserId());
+		return Result.ok().put("menuList", menuList);
+	}
+
+	/**
+	 * 修改登陆用户密码
+	 */
+	@PostMapping("/sys/update/password")
+	public Result updatePassword(String password, String newPassword) {
+		SysUser user = getUser();
+		//原密码加密
+		password = new Sha256Hash(password).toHex();
+		if (!user.getUserPwd().equals(password)) {
+			return Result.error(00002, "原密码不正确");
+		}
+		//新密码加密
+		newPassword = new Sha256Hash(newPassword).toHex();
+		int count = sysLoginService.updatePwdByUserId(newPassword, user.getUserId());
+		if (count == 0) {
+			return Result.error(00003, "修改密码失败");
+		}
+		// 退出
+		ShiroUtils.logout();
+		return Result.ok();
+	}
+
+	/**
+	 * 获取用户信息
+	 */
+	@GetMapping("sys/userInfo")
+	public Result getUserInfo() {
+		return Result.ok().put("user", getUser());
 	}
 }

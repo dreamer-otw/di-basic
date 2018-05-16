@@ -34,7 +34,7 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SysUser user = (SysUser) principals.getPrimaryPrincipal();
 		String userId = user.getUserId();
-		List<SysMenu> sysMenus = sysMenuService.getMenuListByUserId(userId);
+//		List<SysMenu> sysMenus = sysMenuService.getMenuListByUserId(userId);
 		/*List<String> permsList = null;
 		// 用户权限列表
 		Set<String> permsSet = new HashSet<String>();
