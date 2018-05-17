@@ -1,7 +1,6 @@
-package com.dreamer.basic.backstage.sys.service;
+package com.dreamer.basic.backstage.sys.dao;
 
 import com.dreamer.basic.common.generator.entity.SysMenu;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -9,9 +8,8 @@ import java.util.List;
  * >
  * author : dreamer
  * email : dreamers_otw@163.com
- * date : 2018/5/14 16:38
+ * date : 2018/5/17 10:49
  */
-@Service
-public interface SysMenuService {
+public interface SysMenuDao {
     List<SysMenu> getMenuList();
 }

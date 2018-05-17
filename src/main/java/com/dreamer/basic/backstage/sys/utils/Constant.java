@@ -7,6 +7,8 @@ package com.dreamer.basic.backstage.sys.utils;
  * date : 2018/5/15 12:43
  */
 public class Constant {
+    public static final String MYSQL = "mysql";
+    public static final String ORACLE = "oracle";
     /**
      * 菜单类型
      */

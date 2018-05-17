@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.basic.backstage.sys.dao.SysMenuDao">
+    <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysMenu">
+        <id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
+        <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+        <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+        <result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
+        <result column="MENU_TYPE" jdbcType="CHAR" property="menuType" />
+        <result column="ICON" jdbcType="VARCHAR" property="icon" />
+        <result column="ORDER_NUM" jdbcType="DECIMAL" property="orderNum" />
+    </resultMap>
+    <select id="getMenuList" >
+
+    </select>
+
+
+</mapper>

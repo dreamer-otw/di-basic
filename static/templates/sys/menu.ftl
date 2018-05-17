@@ -2,8 +2,6 @@
 <html>
 <head>
     <title>菜单管理</title>
-<#--<#include "header.html.ftl">-->
-<#include "header.html.ftl">
 </head>
 <body>
 <div id="rrapp">

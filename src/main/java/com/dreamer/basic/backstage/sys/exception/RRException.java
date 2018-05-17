@@ -1,4 +1,4 @@
-package com.dreamer.basic.backstage.sys.Exception;
+package com.dreamer.basic.backstage.sys.exception;
 
 /**
  * > 自定义异常

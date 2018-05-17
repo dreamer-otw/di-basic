@@ -1,4 +1,4 @@
-package com.dreamer.basic.backstage.sys.Exception;
+package com.dreamer.basic.backstage.sys.exception;
 
 import com.alibaba.fastjson.JSON;
 import com.dreamer.basic.backstage.sys.utils.Result;

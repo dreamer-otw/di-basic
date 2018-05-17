@@ -123,7 +123,7 @@ public class SysLoginController extends AbstractController{
 	/**
 	 * 获取用户信息
 	 */
-	@GetMapping("sys/userInfo")
+	@GetMapping("/sys/userInfo")
 	public Result getUserInfo() {
 		return Result.ok().put("user", getUser());
 	}
