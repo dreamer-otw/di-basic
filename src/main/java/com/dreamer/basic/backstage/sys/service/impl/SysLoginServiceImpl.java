@@ -110,7 +110,14 @@ public class SysLoginServiceImpl implements SysLoginService {
     private List<SysMenuData> getMenuTreeList(List<SysMenu> sysMenus, List<String> menuIdList) {
         List<SysMenuData> subMenuList = new ArrayList<>();
         for (SysMenu entity : sysMenus) {
-            SysMenuData sysMenuData = (SysMenuData)entity;
+            SysMenuData sysMenuData = new SysMenuData();
+            sysMenuData.setMenuId(entity.getMenuId());
+            sysMenuData.setParentId(entity.getParentId());
+            sysMenuData.setMenuType(entity.getMenuType());
+            sysMenuData.setMenuName(entity.getMenuName());
+            sysMenuData.setMenuUrl(entity.getMenuUrl());
+            sysMenuData.setIcon(entity.getIcon());
+            sysMenuData.setOrderNum(entity.getOrderNum());
             if (Constant.MenuType.CATALOG.getValue().equals(sysMenuData.getMenuType())) {// 目录
                 sysMenuData.setList(getMenuTreeList(getMenuByParentId(sysMenuData.getMenuId(), menuIdList), menuIdList));
             }

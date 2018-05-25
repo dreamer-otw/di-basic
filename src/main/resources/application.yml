@@ -17,6 +17,15 @@ spring:
       initial-size: 2
       min-evictable-idle-time-millis: 300000
       max-wait: 60000
+  freemarker:
+    enabled: true
+    template-loader-path: classpath:templates/
+    request-context-attribute: req
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helpers: true
+    cache: true
+    suffix: .html
 mybatis:
   mapper-locations: classpath*:com/dreamer/basic/**/mapping/*.xml
   dialect: org.apache.ibatis.dialect.OracleDialect

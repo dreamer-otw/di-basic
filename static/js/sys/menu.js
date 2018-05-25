@@ -4,25 +4,25 @@ $(function () {
         datatype: "json",
         colModel: [			
 			{ label: '菜单ID', name: 'menuId', width: 40, hidden: true, key: true },
-			{ label: '菜单名称', name: 'name', width: 60 },
+			{ label: '菜单名称', name: 'menuName', width: 60 },
 			{ label: '上级菜单', name: 'parentName', width: 60 },
 			{ label: '菜单图标', name: 'icon', width: 50, formatter: function(value, options, row){
 				return value == null ? '' : '<i class="'+value+' fa-lg"></i>';
 			}},
-			{ label: '菜单URL', name: 'url', width: 100 },
-			{ label: '授权标识', name: 'perms', width: 100 },
-			{ label: '类型', name: 'type', width: 50, formatter: function(value, options, row){
-				if(value === 0){
+			{ label: '菜单URL', name: 'menuUrl', width: 100 },
+			/*{ label: '授权标识', name: 'perms', width: 100 },*/
+			{ label: '类型', name: 'menuType', width: 50, formatter: function(value, options, row){
+				if(value == "00"){
 					return '<span class="label label-primary">目录</span>';
 				}
-				if(value === 1){
+				if(value == "01"){
 					return '<span class="label label-success">菜单</span>';
 				}
-				if(value === 2){
+				if(value == "02"){
 					return '<span class="label label-warning">按钮</span>';
 				}
 			}},
-			{ label: '排序号', name: 'orderNum', width: 50}                   
+			{ label: '排序号', name: 'orderNum', width: 50}
         ],
 		viewrecords: true,
         height: 400,
@@ -31,19 +31,19 @@ $(function () {
         rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
-        multiselect: true,
+        multiselect: true,//定义多选
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "results",
+            page: "pageNo",
+            total: "pageSize",
+            records: "totalRecord"
         },
-        prmNames : {
+        /*prmNames : {
             page:"page", 
             rows:"limit", 
             order: "order"
-        },
+        },*/
         gridComplete:function(){
         	//隐藏grid底部滚动条
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
@@ -62,7 +62,6 @@ var vm = new Vue({
 			if(menuId == null){
 				return ;
 			}
-			
 			location.href = "menu_add.html?menuId="+menuId;
 		},
 		del: function (event) {

@@ -10,8 +10,12 @@
         <result column="ICON" jdbcType="VARCHAR" property="icon" />
         <result column="ORDER_NUM" jdbcType="DECIMAL" property="orderNum" />
     </resultMap>
-    <select id="getMenuList" >
-
+    <select id="getMenuList" parameterType="Integer" resultMap="BaseResultMap">
+        select * from (
+            select A.*,rownum rn from (
+                select * from sys_menu order by MENU_TYPE,ORDER_NUM asc
+            ) A where rownum &lt;= #{arg1}
+        ) where rn &gt;= #{arg0}
     </select>
 
 

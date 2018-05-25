@@ -4,15 +4,15 @@ var menuItem = Vue.extend({
 	props:{item:{}},
 	template:[
 	          '<li>',
-	          '<a v-if="item.type === 0" href="javascript:;">',
+	          '<a v-if="item.menuType == \'00\'" href="javascript:;">',
 	          '<i v-if="item.icon != null" :class="item.icon"></i>',
-	          '<span>{{item.name}}</span>',
+	          '<span>{{item.menuName}}</span>',
 	          '<i class="fa fa-angle-left pull-right"></i>',
 	          '</a>',
-	          '<ul v-if="item.type === 0" class="treeview-menu">',
+	          '<ul v-if="item.menuType == \'00\'" class="treeview-menu">',
 	          '<menu-item :item="item" v-for="item in item.list"></menu-item>',
 	          '</ul>',
-	          '<a v-if="item.type === 1" :href="\'#\'+item.url"><i v-if="item.icon != null" :class="item.icon"></i><i v-else class="fa fa-circle-o"></i> {{item.name}}</a>',
+	          '<a v-if="item.menuType == \'01\'" :href="\'#\'+item.menuUrl"><i v-if="item.icon != null" :class="item.icon"></i><i v-else class="fa fa-circle-o"></i> {{item.menuName}}</a>',
 	          '</li>'
 	].join('')
 });
@@ -25,7 +25,7 @@ var vm = new Vue({
 	data:{
 		user:{},
 		menuList:{},
-		main:"sys/main.ftl",
+		main:"sys/main.html",
 		password:'',
 		newPassword:'',
         navTitle:"控制台"
@@ -89,10 +89,10 @@ var vm = new Vue({
 function routerList(router, menuList){
 	for(var key in menuList){
 		var menu = menuList[key];
-		if(menu.type == 0){//顶级菜单
+		if(menu.menuType == "00"){//顶级菜单
 			routerList(router, menu.list);
-		}else if(menu.type == 1){//次级菜单
-			router.add('#'+menu.url, function() {
+		}else if(menu.menuType == "01"){//次级菜单
+			router.add('#'+menu.menuUrl, function() {
 				var url = window.location.hash;
 				
 				//替换iframe的url

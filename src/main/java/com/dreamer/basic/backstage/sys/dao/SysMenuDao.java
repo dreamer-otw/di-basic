@@ -4,6 +4,7 @@ import com.dreamer.basic.common.generator.entity.SysMenu;
 
 import java.util.List;
 
+
 /**
  * >
  * author : dreamer
@@ -11,5 +12,5 @@ import java.util.List;
  * date : 2018/5/17 10:49
  */
 public interface SysMenuDao {
-    List<SysMenu> getMenuList();
+    List<SysMenu> getMenuList(Integer startNum, Integer endNum);
 }

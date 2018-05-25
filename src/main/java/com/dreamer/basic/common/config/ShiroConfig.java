@@ -29,7 +29,7 @@ public class ShiroConfig {
         //配置登录的url和登录成功的url
         bean.setLoginUrl("/login.html");
         bean.setSuccessUrl("/index.html");
-        bean.setUnauthorizedUrl("/");
+//        bean.setUnauthorizedUrl("/");
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/statics/**", "anon"); //表示可以匿名访问

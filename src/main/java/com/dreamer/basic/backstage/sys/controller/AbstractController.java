@@ -21,4 +21,5 @@ public abstract class AbstractController {
 	protected String getUserId() {
 		return getUser().getUserId();
 	}
+
 }
