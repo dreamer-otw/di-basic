@@ -14,11 +14,15 @@
         </commentGenerator>
 
         <!--数据库基本信息-->
-        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+        <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
                         connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
                         userId="basic"
                         password="123456">
-        </jdbcConnection>
+        </jdbcConnection>-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/basic?characterEncoding=utf8"
+                        userId="root"
+                        password="654321" />
 
         <!--生成实体类的位置以及包的名字-->
         <!--同样Mac用户：targetProject 为全路径-->
@@ -51,25 +55,20 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>-->
-        <table tableName="SYS_USER">
+        <table tableName="sys_user">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
-            <generatedKey column="USER_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
         </table>
-        <table tableName="SYS_ROLE">
+        <table tableName="sys_role">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
-            <generatedKey column="ROLE_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
         </table>
-        <table tableName="SYS_MENU">
+        <table tableName="sys_menu">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
-            <generatedKey column="MENU_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
         </table>
-        <table tableName="SYS_USER_ROLE">
+        <table tableName="sys_user_role">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
-            <generatedKey column="NEXUS_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
         </table>
-        <table tableName="SYS_ROLE_MENU">
+        <table tableName="sys_role_menu">
             <property name="ignoreQualifiersAtRuntime" value="true"/>
-            <generatedKey column="NEXUS_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
         </table>
     </context>
 </generatorConfiguration>

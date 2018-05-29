@@ -3,36 +3,38 @@ package com.dreamer.basic.common.generator.entity;
 import java.io.Serializable;
 
 public class SysMenu implements Serializable {
-    private String menuId;
+    private Integer menuId;
 
-    private String parentId;
+    private Integer parentId;
 
     private String menuName;
 
     private String menuUrl;
 
-    private String menuType;
+    private Integer menuType;
 
     private String icon;
 
     private Integer orderNum;
 
+    private String perms;
+
     private static final long serialVersionUID = 1L;
 
-    public String getMenuId() {
+    public Integer getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(String menuId) {
-        this.menuId = menuId == null ? null : menuId.trim();
+    public void setMenuId(Integer menuId) {
+        this.menuId = menuId;
     }
 
-    public String getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId == null ? null : parentId.trim();
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public String getMenuName() {
@@ -51,12 +53,12 @@ public class SysMenu implements Serializable {
         this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
-    public String getMenuType() {
+    public Integer getMenuType() {
         return menuType;
     }
 
-    public void setMenuType(String menuType) {
-        this.menuType = menuType == null ? null : menuType.trim();
+    public void setMenuType(Integer menuType) {
+        this.menuType = menuType;
     }
 
     public String getIcon() {
@@ -73,5 +75,13 @@ public class SysMenu implements Serializable {
 
     public void setOrderNum(Integer orderNum) {
         this.orderNum = orderNum;
+    }
+
+    public String getPerms() {
+        return perms;
+    }
+
+    public void setPerms(String perms) {
+        this.perms = perms == null ? null : perms.trim();
     }
 }

@@ -3,35 +3,35 @@ package com.dreamer.basic.common.generator.entity;
 import java.io.Serializable;
 
 public class SysUserRole implements Serializable {
-    private String nexusId;
+    private Integer id;
 
-    private String userId;
+    private Integer userId;
 
-    private String roleId;
+    private Integer roleId;
 
     private static final long serialVersionUID = 1L;
 
-    public String getNexusId() {
-        return nexusId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setNexusId(String nexusId) {
-        this.nexusId = nexusId == null ? null : nexusId.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysUserRoleMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysUserRole">
-    <id column="NEXUS_ID" jdbcType="VARCHAR" property="nexusId" />
-    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
-    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    NEXUS_ID, USER_ID, ROLE_ID
+    id, user_id, role_id
   </sql>
   <select id="selectByExample" parameterType="com.dreamer.basic.common.generator.entity.SysUserRoleExample" resultMap="BaseResultMap">
     select
@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from SYS_USER_ROLE
+    from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,72 +81,70 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from SYS_USER_ROLE
-    where NEXUS_ID = #{nexusId,jdbcType=VARCHAR}
+    from sys_user_role
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from SYS_USER_ROLE
-    where NEXUS_ID = #{nexusId,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user_role
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysUserRoleExample">
-    delete from SYS_USER_ROLE
+    delete from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.dreamer.basic.common.generator.entity.SysUserRole">
-    <selectKey keyProperty="nexusId" order="BEFORE" resultType="java.lang.String">
-      select sys_guid() from dual
-    </selectKey>
-    insert into SYS_USER_ROLE (NEXUS_ID, USER_ID, ROLE_ID
+    insert into sys_user_role (id, user_id, role_id
       )
-    values (#{nexusId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dreamer.basic.common.generator.entity.SysUserRole">
-    <selectKey keyProperty="nexusId" order="BEFORE" resultType="java.lang.String">
-      select sys_guid() from dual
-    </selectKey>
-    insert into SYS_USER_ROLE
+    insert into sys_user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      NEXUS_ID,
+      <if test="id != null">
+        id,
+      </if>
       <if test="userId != null">
-        USER_ID,
+        user_id,
       </if>
       <if test="roleId != null">
-        ROLE_ID,
+        role_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{nexusId,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="roleId != null">
-        #{roleId,jdbcType=VARCHAR},
+        #{roleId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.dreamer.basic.common.generator.entity.SysUserRoleExample" resultType="java.lang.Long">
-    select count(*) from SYS_USER_ROLE
+    select count(*) from sys_user_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update SYS_USER_ROLE
+    update sys_user_role
     <set>
-      <if test="record.nexusId != null">
-        NEXUS_ID = #{record.nexusId,jdbcType=VARCHAR},
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null">
-        USER_ID = #{record.userId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.roleId != null">
-        ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+        role_id = #{record.roleId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -154,30 +152,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update SYS_USER_ROLE
-    set NEXUS_ID = #{record.nexusId,jdbcType=VARCHAR},
-      USER_ID = #{record.userId,jdbcType=VARCHAR},
-      ROLE_ID = #{record.roleId,jdbcType=VARCHAR}
+    update sys_user_role
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      role_id = #{record.roleId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.basic.common.generator.entity.SysUserRole">
-    update SYS_USER_ROLE
+    update sys_user_role
     <set>
       <if test="userId != null">
-        USER_ID = #{userId,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="roleId != null">
-        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+        role_id = #{roleId,jdbcType=INTEGER},
       </if>
     </set>
-    where NEXUS_ID = #{nexusId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysUserRole">
-    update SYS_USER_ROLE
-    set USER_ID = #{userId,jdbcType=VARCHAR},
-      ROLE_ID = #{roleId,jdbcType=VARCHAR}
-    where NEXUS_ID = #{nexusId,jdbcType=VARCHAR}
+    update sys_user_role
+    set user_id = #{userId,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

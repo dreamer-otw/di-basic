@@ -22,7 +22,7 @@ public class SysUserServiceImpl implements SysUserService{
 
 
     @Override
-    public SysUser getUserById(String userId) {
+    public SysUser getUserById(int userId) {
         return sysUserMapper.selectByPrimaryKey(userId);
     }
 
@@ -32,12 +32,12 @@ public class SysUserServiceImpl implements SysUserService{
         sysUserExample.createCriteria().andUserAccountEqualTo(userAccount).andUserAccountIsNotNull();
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
         if (sysUsers != null && sysUsers.size() == 1) {
-        return sysUsers.get(0);
+            return sysUsers.get(0);
         } else if (sysUsers.size() > 1) { //TODO 该用户异常
         /*return new Exception("该用户异常");*/
         }
-        return null;
-        }
+            return null;
+    }
 
     @Override
     public SysUser getUserByUsername(String username) {
@@ -45,10 +45,10 @@ public class SysUserServiceImpl implements SysUserService{
         sysUserExample.createCriteria().andUsernameEqualTo(username).andUsernameIsNotNull();
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
         if (sysUsers != null && sysUsers.size() == 1) {
-        return sysUsers.get(0);
+            return sysUsers.get(0);
         } else if (sysUsers.size() > 1) { //TODO 该用户异常
         /*return new Exception("该用户异常");*/
         }
         return null;
-        }
-        }
+    }
+}

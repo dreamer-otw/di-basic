@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface SysUserService {
     //根据userId查询用户信息
-    SysUser getUserById(String userId);
+    SysUser getUserById(int userId);
 
     //根据userAccount查询用户信息
     SysUser getUserByAccount(String userAccount);

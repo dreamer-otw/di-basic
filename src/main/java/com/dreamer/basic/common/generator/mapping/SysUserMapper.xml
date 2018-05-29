@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysUserMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysUser">
-    <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
-    <result column="USER_ACCOUNT" jdbcType="VARCHAR" property="userAccount" />
-    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
-    <result column="USER_ALIAS" jdbcType="VARCHAR" property="userAlias" />
-    <result column="USER_PWD" jdbcType="VARCHAR" property="userPwd" />
-    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
-    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
-    <result column="STATUS" jdbcType="CHAR" property="status" />
-    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="user_alias" jdbcType="VARCHAR" property="userAlias" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    USER_ID, USER_ACCOUNT, USERNAME, USER_ALIAS, USER_PWD, EMAIL, MOBILE, STATUS, CREATE_TIME
+    user_id, user_account, user_pwd, username, user_alias, email, mobile, user_status, 
+    create_time
   </sql>
   <select id="selectByExample" parameterType="com.dreamer.basic.common.generator.entity.SysUserExample" resultMap="BaseResultMap">
     select
@@ -79,7 +80,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from SYS_USER
+    from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,71 +88,72 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from SYS_USER
-    where USER_ID = #{userId,jdbcType=VARCHAR}
+    from sys_user
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from SYS_USER
-    where USER_ID = #{userId,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysUserExample">
-    delete from SYS_USER
+    delete from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.dreamer.basic.common.generator.entity.SysUser">
-    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.String">
-      select sys_guid() from dual
-    </selectKey>
-    insert into SYS_USER (USER_ID, USER_ACCOUNT, USERNAME, 
-      USER_ALIAS, USER_PWD, EMAIL, 
-      MOBILE, STATUS, CREATE_TIME
+    insert into sys_user (user_id, user_account, user_pwd, 
+      username, user_alias, email, 
+      mobile, user_status, create_time
       )
-    values (#{userId,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{userAlias,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}
+    values (#{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{userAlias,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dreamer.basic.common.generator.entity.SysUser">
-    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.String">
-      select sys_guid() from dual
-    </selectKey>
-    insert into SYS_USER
+    insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      USER_ID,
+      <if test="userId != null">
+        user_id,
+      </if>
       <if test="userAccount != null">
-        USER_ACCOUNT,
-      </if>
-      <if test="username != null">
-        USERNAME,
-      </if>
-      <if test="userAlias != null">
-        USER_ALIAS,
+        user_account,
       </if>
       <if test="userPwd != null">
-        USER_PWD,
+        user_pwd,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="userAlias != null">
+        user_alias,
       </if>
       <if test="email != null">
-        EMAIL,
+        email,
       </if>
       <if test="mobile != null">
-        MOBILE,
+        mobile,
       </if>
-      <if test="status != null">
-        STATUS,
+      <if test="userStatus != null">
+        user_status,
       </if>
       <if test="createTime != null">
-        CREATE_TIME,
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{userId,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
       <if test="userAccount != null">
         #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -159,17 +161,14 @@
       <if test="userAlias != null">
         #{userAlias,jdbcType=VARCHAR},
       </if>
-      <if test="userPwd != null">
-        #{userPwd,jdbcType=VARCHAR},
-      </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
       <if test="mobile != null">
         #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=CHAR},
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=VARCHAR},
@@ -177,40 +176,40 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.dreamer.basic.common.generator.entity.SysUserExample" resultType="java.lang.Long">
-    select count(*) from SYS_USER
+    select count(*) from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update SYS_USER
+    update sys_user
     <set>
       <if test="record.userId != null">
-        USER_ID = #{record.userId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.userAccount != null">
-        USER_ACCOUNT = #{record.userAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="record.username != null">
-        USERNAME = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userAlias != null">
-        USER_ALIAS = #{record.userAlias,jdbcType=VARCHAR},
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
       </if>
       <if test="record.userPwd != null">
-        USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+        user_pwd = #{record.userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAlias != null">
+        user_alias = #{record.userAlias,jdbcType=VARCHAR},
       </if>
       <if test="record.email != null">
-        EMAIL = #{record.email,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="record.mobile != null">
-        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+        mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
-        STATUS = #{record.status,jdbcType=CHAR},
+      <if test="record.userStatus != null">
+        user_status = #{record.userStatus,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
-        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -218,60 +217,60 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update SYS_USER
-    set USER_ID = #{record.userId,jdbcType=VARCHAR},
-      USER_ACCOUNT = #{record.userAccount,jdbcType=VARCHAR},
-      USERNAME = #{record.username,jdbcType=VARCHAR},
-      USER_ALIAS = #{record.userAlias,jdbcType=VARCHAR},
-      USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
-      EMAIL = #{record.email,jdbcType=VARCHAR},
-      MOBILE = #{record.mobile,jdbcType=VARCHAR},
-      STATUS = #{record.status,jdbcType=CHAR},
-      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR}
+    update sys_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      user_pwd = #{record.userPwd,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      user_alias = #{record.userAlias,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      user_status = #{record.userStatus,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.basic.common.generator.entity.SysUser">
-    update SYS_USER
+    update sys_user
     <set>
       <if test="userAccount != null">
-        USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null">
-        USERNAME = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="userAlias != null">
-        USER_ALIAS = #{userAlias,jdbcType=VARCHAR},
+        user_account = #{userAccount,jdbcType=VARCHAR},
       </if>
       <if test="userPwd != null">
-        USER_PWD = #{userPwd,jdbcType=VARCHAR},
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userAlias != null">
+        user_alias = #{userAlias,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
-        EMAIL = #{email,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="mobile != null">
-        MOBILE = #{mobile,jdbcType=VARCHAR},
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        STATUS = #{status,jdbcType=CHAR},
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=VARCHAR},
       </if>
     </set>
-    where USER_ID = #{userId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysUser">
-    update SYS_USER
-    set USER_ACCOUNT = #{userAccount,jdbcType=VARCHAR},
-      USERNAME = #{username,jdbcType=VARCHAR},
-      USER_ALIAS = #{userAlias,jdbcType=VARCHAR},
-      USER_PWD = #{userPwd,jdbcType=VARCHAR},
-      EMAIL = #{email,jdbcType=VARCHAR},
-      MOBILE = #{mobile,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=CHAR},
-      CREATE_TIME = #{createTime,jdbcType=VARCHAR}
-    where USER_ID = #{userId,jdbcType=VARCHAR}
+    update sys_user
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      user_alias = #{userAlias,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      user_status = #{userStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

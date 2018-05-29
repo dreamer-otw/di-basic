@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface SysLoginService {
     //根据用户id获取菜单集合
-    List<SysMenuData> getMenuListByUserId(String userId);
-    int updatePwdByUserId(String password, String userId);
+    List<SysMenuData> getMenuListByUserId(int userId);
+    int updatePwdByUserId(String password, int userId);
 }

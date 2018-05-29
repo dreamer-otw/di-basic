@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysMenuMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysMenu">
-    <id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
-    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
-    <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
-    <result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
-    <result column="MENU_TYPE" jdbcType="CHAR" property="menuType" />
-    <result column="ICON" jdbcType="VARCHAR" property="icon" />
-    <result column="ORDER_NUM" jdbcType="DECIMAL" property="orderNum" />
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="menu_type" jdbcType="INTEGER" property="menuType" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    MENU_ID, PARENT_ID, MENU_NAME, MENU_URL, MENU_TYPE, ICON, ORDER_NUM
+    menu_id, parent_id, menu_name, menu_url, menu_type, icon, order_num, perms
   </sql>
   <select id="selectByExample" parameterType="com.dreamer.basic.common.generator.entity.SysMenuExample" resultMap="BaseResultMap">
     select
@@ -77,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from SYS_MENU
+    from sys_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,63 +86,64 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from SYS_MENU
-    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    from sys_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from SYS_MENU
-    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysMenuExample">
-    delete from SYS_MENU
+    delete from sys_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.dreamer.basic.common.generator.entity.SysMenu">
-    <selectKey keyProperty="menuId" order="BEFORE" resultType="java.lang.String">
-      select sys_guid() from dual
-    </selectKey>
-    insert into SYS_MENU (MENU_ID, PARENT_ID, MENU_NAME, 
-      MENU_URL, MENU_TYPE, ICON, 
-      ORDER_NUM)
-    values (#{menuId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
-      #{menuUrl,jdbcType=VARCHAR}, #{menuType,jdbcType=CHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{orderNum,jdbcType=DECIMAL})
+    insert into sys_menu (menu_id, parent_id, menu_name, 
+      menu_url, menu_type, icon, 
+      order_num, perms)
+    values (#{menuId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuType,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER}, #{perms,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.dreamer.basic.common.generator.entity.SysMenu">
-    <selectKey keyProperty="menuId" order="BEFORE" resultType="java.lang.String">
-      select sys_guid() from dual
-    </selectKey>
-    insert into SYS_MENU
+    insert into sys_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      MENU_ID,
+      <if test="menuId != null">
+        menu_id,
+      </if>
       <if test="parentId != null">
-        PARENT_ID,
+        parent_id,
       </if>
       <if test="menuName != null">
-        MENU_NAME,
+        menu_name,
       </if>
       <if test="menuUrl != null">
-        MENU_URL,
+        menu_url,
       </if>
       <if test="menuType != null">
-        MENU_TYPE,
+        menu_type,
       </if>
       <if test="icon != null">
-        ICON,
+        icon,
       </if>
       <if test="orderNum != null">
-        ORDER_NUM,
+        order_num,
+      </if>
+      <if test="perms != null">
+        perms,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{menuId,jdbcType=VARCHAR},
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
       <if test="parentId != null">
-        #{parentId,jdbcType=VARCHAR},
+        #{parentId,jdbcType=INTEGER},
       </if>
       <if test="menuName != null">
         #{menuName,jdbcType=VARCHAR},
@@ -150,45 +152,51 @@
         #{menuUrl,jdbcType=VARCHAR},
       </if>
       <if test="menuType != null">
-        #{menuType,jdbcType=CHAR},
+        #{menuType,jdbcType=INTEGER},
       </if>
       <if test="icon != null">
         #{icon,jdbcType=VARCHAR},
       </if>
       <if test="orderNum != null">
-        #{orderNum,jdbcType=DECIMAL},
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="perms != null">
+        #{perms,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.dreamer.basic.common.generator.entity.SysMenuExample" resultType="java.lang.Long">
-    select count(*) from SYS_MENU
+    select count(*) from sys_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update SYS_MENU
+    update sys_menu
     <set>
       <if test="record.menuId != null">
-        MENU_ID = #{record.menuId,jdbcType=VARCHAR},
+        menu_id = #{record.menuId,jdbcType=INTEGER},
       </if>
       <if test="record.parentId != null">
-        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+        parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
       <if test="record.menuName != null">
-        MENU_NAME = #{record.menuName,jdbcType=VARCHAR},
+        menu_name = #{record.menuName,jdbcType=VARCHAR},
       </if>
       <if test="record.menuUrl != null">
-        MENU_URL = #{record.menuUrl,jdbcType=VARCHAR},
+        menu_url = #{record.menuUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.menuType != null">
-        MENU_TYPE = #{record.menuType,jdbcType=CHAR},
+        menu_type = #{record.menuType,jdbcType=INTEGER},
       </if>
       <if test="record.icon != null">
-        ICON = #{record.icon,jdbcType=VARCHAR},
+        icon = #{record.icon,jdbcType=VARCHAR},
       </if>
       <if test="record.orderNum != null">
-        ORDER_NUM = #{record.orderNum,jdbcType=DECIMAL},
+        order_num = #{record.orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.perms != null">
+        perms = #{record.perms,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -196,50 +204,55 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update SYS_MENU
-    set MENU_ID = #{record.menuId,jdbcType=VARCHAR},
-      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
-      MENU_NAME = #{record.menuName,jdbcType=VARCHAR},
-      MENU_URL = #{record.menuUrl,jdbcType=VARCHAR},
-      MENU_TYPE = #{record.menuType,jdbcType=CHAR},
-      ICON = #{record.icon,jdbcType=VARCHAR},
-      ORDER_NUM = #{record.orderNum,jdbcType=DECIMAL}
+    update sys_menu
+    set menu_id = #{record.menuId,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      menu_name = #{record.menuName,jdbcType=VARCHAR},
+      menu_url = #{record.menuUrl,jdbcType=VARCHAR},
+      menu_type = #{record.menuType,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      order_num = #{record.orderNum,jdbcType=INTEGER},
+      perms = #{record.perms,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.basic.common.generator.entity.SysMenu">
-    update SYS_MENU
+    update sys_menu
     <set>
       <if test="parentId != null">
-        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+        parent_id = #{parentId,jdbcType=INTEGER},
       </if>
       <if test="menuName != null">
-        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+        menu_name = #{menuName,jdbcType=VARCHAR},
       </if>
       <if test="menuUrl != null">
-        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
       </if>
       <if test="menuType != null">
-        MENU_TYPE = #{menuType,jdbcType=CHAR},
+        menu_type = #{menuType,jdbcType=INTEGER},
       </if>
       <if test="icon != null">
-        ICON = #{icon,jdbcType=VARCHAR},
+        icon = #{icon,jdbcType=VARCHAR},
       </if>
       <if test="orderNum != null">
-        ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="perms != null">
+        perms = #{perms,jdbcType=VARCHAR},
       </if>
     </set>
-    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysMenu">
-    update SYS_MENU
-    set PARENT_ID = #{parentId,jdbcType=VARCHAR},
-      MENU_NAME = #{menuName,jdbcType=VARCHAR},
-      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
-      MENU_TYPE = #{menuType,jdbcType=CHAR},
-      ICON = #{icon,jdbcType=VARCHAR},
-      ORDER_NUM = #{orderNum,jdbcType=DECIMAL}
-    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+    update sys_menu
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_type = #{menuType,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      perms = #{perms,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -33,7 +33,7 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SysUser user = (SysUser) principals.getPrimaryPrincipal();
-		String userId = user.getUserId();
+		int userId = user.getUserId();
 //		List<SysMenu> sysMenus = sysMenuService.getMenuListByUserId(userId);
 		/*List<String> permsList = null;
 		// 用户权限列表
@@ -74,7 +74,7 @@ public class UserRealm extends AuthorizingRealm {
 		}
 
 		// 账号锁定
-		if ("00".equals(user.getStatus())) {
+		if (user.getUserStatus() == 0) {
 			throw new LockedAccountException("账号已被锁定,请联系管理员");
 		}
 

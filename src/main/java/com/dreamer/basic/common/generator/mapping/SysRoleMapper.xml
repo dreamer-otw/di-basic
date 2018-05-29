@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysRoleMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysRole">
-    <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
-    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
-    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
-    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ROLE_ID, ROLE_NAME, REMARK, CREATE_TIME
+    role_id, role_name, remark, create_time
   </sql>
   <select id="selectByExample" parameterType="com.dreamer.basic.common.generator.entity.SysRoleExample" resultMap="BaseResultMap">
     select
@@ -74,7 +74,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from SYS_ROLE
+    from sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,50 +82,48 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from SYS_ROLE
-    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    from sys_role
+    where role_id = #{roleId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from SYS_ROLE
-    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role
+    where role_id = #{roleId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysRoleExample">
-    delete from SYS_ROLE
+    delete from sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
-    <selectKey keyProperty="roleId" order="BEFORE" resultType="java.lang.String">
-      select sys_guid() from dual
-    </selectKey>
-    insert into SYS_ROLE (ROLE_ID, ROLE_NAME, REMARK, 
-      CREATE_TIME)
-    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+    insert into sys_role (role_id, role_name, remark, 
+      create_time)
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
-    <selectKey keyProperty="roleId" order="BEFORE" resultType="java.lang.String">
-      select sys_guid() from dual
-    </selectKey>
-    insert into SYS_ROLE
+    insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      ROLE_ID,
+      <if test="roleId != null">
+        role_id,
+      </if>
       <if test="roleName != null">
-        ROLE_NAME,
+        role_name,
       </if>
       <if test="remark != null">
-        REMARK,
+        remark,
       </if>
       <if test="createTime != null">
-        CREATE_TIME,
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      #{roleId,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
       <if test="roleName != null">
         #{roleName,jdbcType=VARCHAR},
       </if>
@@ -138,25 +136,25 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.dreamer.basic.common.generator.entity.SysRoleExample" resultType="java.lang.Long">
-    select count(*) from SYS_ROLE
+    select count(*) from sys_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update SYS_ROLE
+    update sys_role
     <set>
       <if test="record.roleId != null">
-        ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
+        role_id = #{record.roleId,jdbcType=INTEGER},
       </if>
       <if test="record.roleName != null">
-        ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
+        role_name = #{record.roleName,jdbcType=VARCHAR},
       </if>
       <if test="record.remark != null">
-        REMARK = #{record.remark,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -164,35 +162,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update SYS_ROLE
-    set ROLE_ID = #{record.roleId,jdbcType=VARCHAR},
-      ROLE_NAME = #{record.roleName,jdbcType=VARCHAR},
-      REMARK = #{record.remark,jdbcType=VARCHAR},
-      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR}
+    update sys_role
+    set role_id = #{record.roleId,jdbcType=INTEGER},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
-    update SYS_ROLE
+    update sys_role
     <set>
       <if test="roleName != null">
-        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+        role_name = #{roleName,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
-        REMARK = #{remark,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=VARCHAR},
       </if>
     </set>
-    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
-    update SYS_ROLE
-    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
-      REMARK = #{remark,jdbcType=VARCHAR},
-      CREATE_TIME = #{createTime,jdbcType=VARCHAR}
-    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    update sys_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=INTEGER}
   </update>
 </mapper>

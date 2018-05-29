@@ -3,32 +3,32 @@ package com.dreamer.basic.common.generator.entity;
 import java.io.Serializable;
 
 public class SysUser implements Serializable {
-    private String userId;
+    private Integer userId;
 
     private String userAccount;
+
+    private String userPwd;
 
     private String username;
 
     private String userAlias;
 
-    private String userPwd;
-
     private String email;
 
     private String mobile;
 
-    private String status;
+    private Integer userStatus;
 
     private String createTime;
 
     private static final long serialVersionUID = 1L;
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserAccount() {
@@ -37,6 +37,14 @@ public class SysUser implements Serializable {
 
     public void setUserAccount(String userAccount) {
         this.userAccount = userAccount == null ? null : userAccount.trim();
+    }
+
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd == null ? null : userPwd.trim();
     }
 
     public String getUsername() {
@@ -55,14 +63,6 @@ public class SysUser implements Serializable {
         this.userAlias = userAlias == null ? null : userAlias.trim();
     }
 
-    public String getUserPwd() {
-        return userPwd;
-    }
-
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd == null ? null : userPwd.trim();
-    }
-
     public String getEmail() {
         return email;
     }
@@ -79,12 +79,12 @@ public class SysUser implements Serializable {
         this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public String getStatus() {
-        return status;
+    public Integer getUserStatus() {
+        return userStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
     }
 
     public String getCreateTime() {
