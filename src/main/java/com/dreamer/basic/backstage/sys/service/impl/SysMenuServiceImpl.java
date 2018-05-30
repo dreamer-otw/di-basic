@@ -26,8 +26,8 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public Page<SysMenu> getMenuList(Integer pageNo, Integer pageSize) {
         long count = sysMenuMapper.countByExample(null);
-        int startNum = (pageNo - 1) * pageSize + 1;
-        int endNum = pageNo * pageSize;
+        int startNum = (pageNo - 1) * pageSize;
+        int endNum = pageNo * pageSize - 1;
         List<SysMenu> menuList = sysMenuDao.getMenuList(startNum, endNum);
         Page<SysMenu> sysMenuPage = new Page<>();
         sysMenuPage.setPageNo(pageNo);

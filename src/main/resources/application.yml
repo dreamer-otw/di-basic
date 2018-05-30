@@ -15,7 +15,6 @@ spring:
 #    url: jdbc:oracle:thin:@localhost:1521:orcl
 #    username: basic
 #    password: 123456
-#
     druid:
       min-idle: 5
       max-active: 15
@@ -33,7 +32,8 @@ spring:
     suffix: .html
 mybatis:
   mapper-locations: classpath*:com/dreamer/basic/**/mapping/*.xml
-  dialect: org.apache.ibatis.dialect.OracleDialect
+#  dialect: org.apache.ibatis.dialect.OracleDialect
+  dialect: cn.org.rapid_framework.jdbc.dialect.MySQLDialect
   bbase-package: com.dreamer.basic.**.dao
   aliases-package: com.dreamer.basic.**.entity,com.dreamer.basic.**.data
   underscore-to-camel-case: true

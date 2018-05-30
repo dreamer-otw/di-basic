@@ -80,7 +80,7 @@ public class SysLoginServiceImpl implements SysLoginService {
      */
     private List<SysMenuData> getMenusAll(List<Integer> menuIdList) {
         //获取根菜单（即目录）
-        List<SysMenu> rootMenus = getMenuByParentId(0, menuIdList);
+        List<SysMenu> rootMenus = getMenuByParentId(-1, menuIdList);
         //递归获取所有菜单
         return getMenuTreeList(rootMenus, menuIdList);
     }
