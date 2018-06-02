@@ -16,24 +16,29 @@ public class Constant {
         /**
          * 目录
          */
-        CATALOG("00"),
+        CATALOG(-1),
         /**
          * 菜单
          */
-        MENU("01"),
+        MENU(1),
         /**
          * 按钮
          */
-        BUTTON("02");
+        BUTTON(2);
 
-        private String value;
+        private Integer value;
 
-        MenuType(String value) {
+        MenuType(Integer value) {
             this.value = value;
         }
 
-        public String getValue() {
+        public Integer getValue() {
             return value;
         }
     }
+
+    /**
+     * 超级管理员
+     */
+    public static final Integer ROOT_USER = 0;
 }

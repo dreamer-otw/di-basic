@@ -1,8 +1,11 @@
 package com.dreamer.basic.backstage.sys.service;
 
+import com.dreamer.basic.backstage.sys.data.SysMenuData;
 import com.dreamer.basic.backstage.sys.utils.Page;
 import com.dreamer.basic.common.generator.entity.SysMenu;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -14,5 +17,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface SysMenuService {
     Page<SysMenu> getMenuList(Integer pageNo, Integer pageSize);
-
+    List<SysMenuData> getMenuTree(Integer userId);
 }

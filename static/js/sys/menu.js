@@ -12,13 +12,13 @@ $(function () {
 			{ label: '菜单URL', name: 'menuUrl', width: 100 },
 			/*{ label: '授权标识', name: 'perms', width: 100 },*/
 			{ label: '类型', name: 'menuType', width: 50, formatter: function(value, options, row){
-				if(value == "00"){
+				if(value === 0){
 					return '<span class="label label-primary">目录</span>';
 				}
-				if(value == "01"){
+				if(value === 1){
 					return '<span class="label label-success">菜单</span>';
 				}
-				if(value == "02"){
+				if(value === 2){
 					return '<span class="label label-warning">按钮</span>';
 				}
 			}},
@@ -39,11 +39,11 @@ $(function () {
             total: "pageSize",
             records: "totalRecord"
         },
-        /*prmNames : {
-            page:"page", 
-            rows:"limit", 
+        prmNames : {
+            page:"pageNo",
+            rows:"pageSize",
             order: "order"
-        },*/
+        },
         gridComplete:function(){
         	//隐藏grid底部滚动条
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 

@@ -7,7 +7,8 @@ var setting = {
 			rootPId: -1
 		},
 		key: {
-			url:"nourl"
+			url:"nourl",
+			name: "menuName"
 		}
 	}
 };
@@ -31,14 +32,13 @@ var vm = new Vue({
 			this.title = "修改菜单";
 			this.getMenu(menuId)
 		}
-		
 		//加载菜单树
-		$.get("../sys/menu/select", function(r){
-			ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuList);
+		$.get("../sys/menu/menuTree", function(r) {
+			ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuTree);
 			var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
 			ztree.selectNode(node);
-			
-			vm.menu.parentName = node.name;
+//			alert("node:" + JSON.stringify(node) + ",node_name:" + node.menuName)
+			vm.menu.parentName = node.menuName;
 		})
     },
 	methods: {
