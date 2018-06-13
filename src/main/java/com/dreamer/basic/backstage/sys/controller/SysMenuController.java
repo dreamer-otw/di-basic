@@ -32,7 +32,8 @@ public class SysMenuController extends AbstractController {
         Page<SysMenu> menuList = sysMenuService.getMenuList(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
         return menuList;
     }
-    @RequestMapping(value = "/menuTree", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/getMenuTree", method = RequestMethod.GET)
     @ResponseBody
     public Result getMentTree() {
         List<SysMenuData> menuTree = sysMenuService.getMenuTree(getUserId());
@@ -40,4 +41,47 @@ public class SysMenuController extends AbstractController {
         retData.put("menuTree", menuTree);
         return Result.ok(retData);
     }
+
+    @PostMapping("/save")
+    @ResponseBody
+    public Result saveMenu(@RequestBody SysMenu menu) {
+        int num = sysMenuService.insertMenu(menu);
+        if (num > 0) {
+            return Result.ok("添加成功");
+        }
+        return Result.error("添加失败");
+    }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public Result updateMenu(@RequestBody SysMenu menu) {
+        int num = sysMenuService.updateMenu(menu);
+        if (num > 0) {
+            return Result.ok("修改成功");
+        }
+        return Result.error("修改失败");
+    }
+
+    @PostMapping("/delMenu")
+    @ResponseBody
+    public Result delMenu(@RequestBody String[] menuIds) {
+        int num = sysMenuService.delMenu(menuIds);
+        if (num > 0) {
+            return Result.ok("删除成功");
+        }
+        return Result.error("删除失败");
+    }
+
+    @GetMapping("/menuInfo/{menuId}")
+    @ResponseBody
+    public Result getMenuInfoByMenuId(@PathVariable("menuId") String menuId) {
+        SysMenuData menuInfo = sysMenuService.getMenuInfoByMenuId(menuId);
+        if (menuInfo != null) {
+            Map<String, Object> retData = new HashMap<>();
+            retData.put("menuInfo", menuInfo);
+            return Result.ok(retData);
+        }
+        return Result.error("获取失败");
+    }
+
 }

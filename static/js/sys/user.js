@@ -46,7 +46,7 @@ var vm = new Vue({
 	data:{
 		
 	},
-	methods: {
+	methods:
 		update: function (event) {
 			var userId = getSelectedRow();
 			if(userId == null){

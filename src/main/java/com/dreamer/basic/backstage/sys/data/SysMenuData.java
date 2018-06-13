@@ -11,9 +11,18 @@ import java.util.List;
  * date : 2018/5/16 16:31
  */
 public class SysMenuData extends SysMenu{
+
+    private String parentName;
     private Boolean open;
     private List<?> list;
 
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
     public Boolean getOpen() {
         return open;
     }

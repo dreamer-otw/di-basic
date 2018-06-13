@@ -50,10 +50,10 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public List<SysMenuData> getMenuTree(Integer userId) {
         if (userId == Constant.ROOT_USER) {//超级管理员
-            List<SysMenu> rootMenuList = sysMenuMapper.selectByExample(null);
-            return getMenuTree(rootMenuList);
+            List<SysMenuData> menuList = sysMenuDao.getMenuDataList();
+            return getMenuTree(menuList);
         } else {
-            List<SysMenu> sysMenus = new ArrayList<>();
+            List<SysMenuData> sysMenus = new ArrayList<>();
             SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
             sysUserRoleExample.createCriteria().andUserIdIsNotNull().andUserIdEqualTo(userId);
             List<SysUserRole> sysUserRoles = sysUserRoleMapper.selectByExample(sysUserRoleExample);
@@ -62,30 +62,48 @@ public class SysMenuServiceImpl implements SysMenuService {
                 sysRoleMenuExample.createCriteria().andRoleIdIsNotNull().andRoleIdEqualTo(sysUserRole.getRoleId());
                 List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectByExample(sysRoleMenuExample);
                 for (SysRoleMenu sysRoleMenu : sysRoleMenus) {
-                    SysMenu sysMenu = sysMenuMapper.selectByPrimaryKey(sysRoleMenu.getMenuId());
-                    sysMenus.add(sysMenu);
+                    SysMenuData sysMenuData = sysMenuDao.getMenuByMenuId(sysRoleMenu.getMenuId());
+                    sysMenus.add(sysMenuData);
                 }
             }
             return getMenuTree(sysMenus);
         }
     }
 
+    @Override
+    public int insertMenu(SysMenu sysMenu) {
+        return sysMenuMapper.insertSelective(sysMenu);
+    }
+
+    @Override
+    public int updateMenu(SysMenu sysMenu) {
+        return sysMenuMapper.updateByPrimaryKeySelective(sysMenu);
+    }
+
+    @Override
+    public int delMenu(String[] menuIds) {
+        int num = 0;
+        for (int i = 0; i < menuIds.length; i++) {
+            num += sysMenuMapper.deleteByPrimaryKey(Integer.valueOf(menuIds[i]));
+        }
+        return num;
+    }
+
+    @Override
+    public SysMenuData getMenuInfoByMenuId(String menuId) {
+        return sysMenuDao.getMenuByMenuId(Integer.valueOf(menuId));
+    }
+
     /**
      *
-     * @param sysMenus      [菜单集合]
+     * @param sysMenuDatas      [菜单集合]
      * @return  []
      */
-    private List<SysMenuData> getMenuTree(List<SysMenu> sysMenus) {
-        List<SysMenuData> sysMenuDatas = new ArrayList<>();
-        for (SysMenu sysMenu : sysMenus) {
-            SysMenuData sysMenuData = new SysMenuData();
-            sysMenuData.setMenuId(sysMenu.getMenuId());
-            sysMenuData.setParentId(sysMenu.getParentId());
-            sysMenuData.setMenuName(sysMenu.getMenuName());
-            if (sysMenu.getMenuType() == -1) {
+    private List<SysMenuData> getMenuTree(List<SysMenuData> sysMenuDatas) {
+        for (SysMenuData sysMenuData : sysMenuDatas) {
+            if (sysMenuData.getMenuType() == 0) {
                 sysMenuData.setOpen(false);
             }
-            sysMenuDatas.add(sysMenuData);
         }
         return sysMenuDatas;
     }

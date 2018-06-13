@@ -73,7 +73,7 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: "../sys/menu/delete",
+				    url: "../sys/menu/delMenu",
 				    data: JSON.stringify(menuIds),
 				    success: function(r){
 				    	if(r.code === 0){

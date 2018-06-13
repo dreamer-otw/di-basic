@@ -22,8 +22,8 @@ var vm = new Vue({
 		title:"新增菜单",
 		menu:{
 			parentName:"",
-			parentId:0,
-			type:1,
+			parentId:-1,
+			menuType:0,
 			orderNum:0
 		}
 	},
@@ -31,20 +31,68 @@ var vm = new Vue({
 		if(menuId != null){
 			this.title = "修改菜单";
 			this.getMenu(menuId)
+		} else {
+		    this.selectMenuType()
 		}
 		//加载菜单树
-		$.get("../sys/menu/menuTree", function(r) {
+		$.get("../sys/menu/getMenuTree", function(r) {
 			ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuTree);
-			var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
-			ztree.selectNode(node);
-//			alert("node:" + JSON.stringify(node) + ",node_name:" + node.menuName)
-			vm.menu.parentName = node.menuName;
 		})
     },
 	methods: {
+	    selectMenuType: function() {
+	        var radioCheck;
+	        var radios = $("input[name='menuType']");
+	        for (var i=0;i<radios.length;i++) {
+                if (radios[i].checked) {
+                    radioCheck = radios[i].value;
+                }
+            }
+            switch (radioCheck) {
+                case '0':
+                    this.labelMenuName = "目录名称";
+                    this.labelParentName = "";
+                    $("#form-menuName").show();
+                    $("#form-parentName").hide().value="";
+                    $("#form-menuUrl").hide().value="";
+                    $("#form-perms").hide().value="";
+                    $("#form-orderNum").show();
+                    $("#form-menuIcon").show();
+                    break;
+                case '1':
+                    this.labelMenuName = "菜单名称";
+                    this.labelParentName = "上级菜单";
+                    $("#form-menuName").show();
+                    $("#form-parentName").show();
+                    $("#form-menuUrl").show();
+                    $("#form-perms").show();
+                    $("#form-orderNum").show();
+                    $("#form-menuIcon").show();
+                    break;
+                case '2':
+                    this.labelMenuName = "按钮名称";
+                    this.labelParentName = "所属菜单";
+                    $("#form-menuName").show();
+                    $("#form-parentName").show();
+                    $("#form-menuUrl").hide().value="";
+                    $("#form-perms").show();
+                    $("#form-orderNum").hide().value="";
+                    $("#form-menuIcon").hide().value="";
+                    break;
+                default:
+                    this.labelMenuName = "目录名称";
+                    this.labelParentName = "";
+                    $("#form-menuName").show();
+                    $("#form-parentName").hide().value="";
+                    $("#form-menuUrl").hide().value="";
+                    $("#form-perms").hide().value="";
+                    $("#form-orderNum").show();
+                    $("#form-menuIcon").show();
+            }
+	    },
 		getMenu: function(menuId){
-			$.get("../sys/menu/info/"+menuId, function(r){
-                vm.menu = r.menu;
+			$.get("../sys/menu/menuInfo/"+menuId, function(r){
+                vm.menu = r.menuInfo;
             });
 		},
 		saveOrUpdate: function (event) {
@@ -79,7 +127,7 @@ var vm = new Vue({
 					var node = ztree.getSelectedNodes();
 					//选择上级菜单
 					vm.menu.parentId = node[0].menuId;
-					vm.menu.parentName = node[0].name;
+					vm.menu.parentName = node[0].menuName;
 					
 					layer.close(index);
 	            }

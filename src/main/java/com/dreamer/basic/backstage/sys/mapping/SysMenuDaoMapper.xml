@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.backstage.sys.dao.SysMenuDao">
-    <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysMenu">
+    <resultMap id="BaseResultMap" type="com.dreamer.basic.backstage.sys.data.SysMenuData">
         <id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
         <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
         <result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
@@ -9,6 +9,7 @@
         <result column="MENU_TYPE" jdbcType="CHAR" property="menuType" />
         <result column="ICON" jdbcType="VARCHAR" property="icon" />
         <result column="ORDER_NUM" jdbcType="DECIMAL" property="orderNum" />
+        <result column="PARENT_NAME" jdbcType="VARCHAR" property="parentName"/>
     </resultMap>
     <!-- oracle -->
     <!--<select id="getMenuList" parameterType="Integer" resultMap="BaseResultMap">
@@ -22,6 +23,24 @@
     <select id="getMenuList" parameterType="Integer" resultMap="BaseResultMap">
         select * from sys_menu order by MENU_TYPE,ORDER_NUM asc limit #{arg0},#{arg1}
     </select>
+    <select id="getMenuByMenuId" parameterType="Integer" resultMap="BaseResultMap">
+        select A.*,
+            if(A.parent_id = -1,
+                '根目录',
+                (select menu_name from sys_menu where menu_id = A.parent_id)
+            ) as parent_name
+        from sys_menu A
+        where A.menu_id = #{menuId}
+    </select>
+    <select id="getMenuDataList" parameterType="Integer" resultMap="BaseResultMap">
+        select A.*,
+            if(A.parent_id = -1,
+                '根目录',
+                (select menu_name from sys_menu where menu_id = A.parent_id)
+            ) as parent_name
+        from sys_menu A
+    </select>
+
 
 
 </mapper>

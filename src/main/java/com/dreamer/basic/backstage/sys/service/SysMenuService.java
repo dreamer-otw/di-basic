@@ -18,4 +18,8 @@ import java.util.List;
 public interface SysMenuService {
     Page<SysMenu> getMenuList(Integer pageNo, Integer pageSize);
     List<SysMenuData> getMenuTree(Integer userId);
+    int insertMenu(SysMenu sysMenu);
+    int updateMenu(SysMenu sysMenu);
+    int delMenu(String[] menuIds);
+    SysMenuData getMenuInfoByMenuId(String menuId);
 }

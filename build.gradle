@@ -67,6 +67,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-rest')
     //mysql
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    // https://mvnrepository.com/artifact/com.oracle/ojdbc6
+    testCompile group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.3'
     //redis
     compile('org.springframework.boot:spring-boot-starter-data-redis')
     //druid
