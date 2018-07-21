@@ -4,7 +4,6 @@ import com.dreamer.basic.backstage.sys.data.SysMenuData;
 import com.dreamer.basic.backstage.sys.service.SysMenuService;
 import com.dreamer.basic.backstage.sys.utils.Page;
 import com.dreamer.basic.backstage.sys.utils.Result;
-import com.dreamer.basic.backstage.sys.utils.SpringUtil;
 import com.dreamer.basic.common.generator.entity.SysMenu;
 import com.dreamer.basic.common.util.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +24,13 @@ import java.util.Map;
 @RequestMapping("/sys/menu")
 public class SysMenuController extends AbstractController {
 
-//    @Autowired
-//    private SysMenuService sysMenuService;
-//
-    SysMenuService sysMenuService;
+    @Autowired
+    private SysMenuService sysMenuService;
+
+    /*SysMenuService sysMenuService;
     public void SysMenuController() {
-        sysMenuService = SpringUtil.getBean("sysMenuService",SysMenuService.class);
-    }
+        this.sysMenuService = SpringUtils.getBean("sysMenuService",SysMenuService.class);
+    }*/
 
     @GetMapping("/list")
     @ResponseBody

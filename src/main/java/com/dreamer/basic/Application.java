@@ -1,6 +1,5 @@
 package com.dreamer.basic;
 
-import com.dreamer.basic.backstage.sys.utils.SpringUtil;
 import com.dreamer.basic.common.util.SpringUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @MapperScan({"com.dreamer.basic.**.dao"})
 @ComponentScan({"com.dreamer.basic"})
-@Import(SpringUtil.class)
+@Import(SpringUtils.class)
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
