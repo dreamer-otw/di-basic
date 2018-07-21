@@ -1,6 +1,8 @@
 package com.dreamer.basic.backstage.sys.service.impl;
 
+import com.dreamer.basic.backstage.sys.dao.SysUserDao;
 import com.dreamer.basic.backstage.sys.service.SysUserService;
+import com.dreamer.basic.backstage.sys.utils.Page;
 import com.dreamer.basic.common.generator.dao.SysUserMapper;
 import com.dreamer.basic.common.generator.entity.SysUser;
 import com.dreamer.basic.common.generator.entity.SysUserExample;
@@ -19,6 +21,8 @@ import java.util.List;
 public class SysUserServiceImpl implements SysUserService{
     @Autowired
     private SysUserMapper sysUserMapper;
+    @Autowired
+    private SysUserDao sysUserDao;
 
 
     @Override
@@ -36,7 +40,7 @@ public class SysUserServiceImpl implements SysUserService{
         } else if (sysUsers.size() > 1) { //TODO 该用户异常
         /*return new Exception("该用户异常");*/
         }
-            return null;
+        return null;
     }
 
     @Override
@@ -49,6 +53,11 @@ public class SysUserServiceImpl implements SysUserService{
         } else if (sysUsers.size() > 1) { //TODO 该用户异常
         /*return new Exception("该用户异常");*/
         }
+        return null;
+    }
+
+    @Override
+    public Page<SysUser> getUserList(Integer pageNo, Integer pageSize) {
         return null;
     }
 }

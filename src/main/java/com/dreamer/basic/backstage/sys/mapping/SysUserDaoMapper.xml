@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.basic.backstage.sys.dao.SysUserDao">
+    <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysUser">
+        <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+        <result column="USER_ACCOUNT" jdbcType="VARCHAR" property="userAccount" />
+        <result column="USER_PWD" jdbcType="VARCHAR" property="userPwd" />
+        <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+        <result column="USER_ALIAS" jdbcType="VARCHAR" property="userAlias" />
+        <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+        <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+        <result column="USER_STATUS" jdbcType="INTEGER" property="userStatus"/>
+        <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime"/>
+
+    </resultMap>
+    <!-- oracle -->
+    <!--<select id="getUserList" parameterType="Integer" resultMap="BaseResultMap">
+        select * from (
+            select A.*,rownum rn from (
+                select * from sys_user order by user_id asc
+            ) A where rownum &lt;= #{arg1}
+        ) where rn &gt;= #{arg0}
+    </select>-->
+    <!-- mysql -->
+    <select id="getUserList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from sys_user order by user_id asc limit #{arg0},#{arg1}
+    </select>
+
+
+
+
+</mapper>

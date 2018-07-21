@@ -1,7 +1,10 @@
 package com.dreamer.basic.backstage.sys.service;
 
+import com.dreamer.basic.backstage.sys.utils.Page;
 import com.dreamer.basic.common.generator.entity.SysUser;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * >
@@ -19,5 +22,7 @@ public interface SysUserService {
 
     //根据Username查询用户信息
     SysUser getUserByUsername(String username);
+    //分页list
+    Page<SysUser> getUserList(Integer pageNo, Integer pageSize);
 
 }

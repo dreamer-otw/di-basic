@@ -4,15 +4,18 @@ $(function () {
         datatype: "json",
         colModel: [			
 			{ label: '用户ID', name: 'userId', width: 45,hidden: true,key: true },
+			{ label: '登录帐号', name: 'userAccount', width: 75 },
+			{ label: '登录密码', name: 'userPwd', width: 75 },
 			{ label: '用户名', name: 'username', width: 75 },
+			{ label: '别名', name: 'userAlias', width: 75 },
 			{ label: '邮箱', name: 'email', width: 90 },
 			{ label: '手机号', name: 'mobile', width: 100 },
-			{ label: '状态', name: 'status', width: 80, formatter: function(value, options, row){
-				return value === 0 ? 
-					'<span class="label label-danger">禁用</span>' : 
+			{ label: '状态', name: 'userStatus', width: 80, formatter: function(value, options, row){
+				return value === 0 ?
+					'<span class="label label-danger">禁用</span>' :
 					'<span class="label label-success">正常</span>';
 			}},
-			{ label: '创建时间', name: 'createTime', width: 80}                   
+			{ label: '创建时间', name: 'createTime', width: 80}
         ],
 		viewrecords: true,
         height: 400,
@@ -24,16 +27,16 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "results",
+            page: "pageNo",
+            total: "pageSize",
+            records: "totalRecord"
         },
-        prmNames : {
+        /*prmNames : {
             page:"page", 
             rows:"limit", 
             order: "order"
-        },
+        },*/
         gridComplete:function(){
         	//隐藏grid底部滚动条
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });

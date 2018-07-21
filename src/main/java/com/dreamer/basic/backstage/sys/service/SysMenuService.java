@@ -14,7 +14,7 @@ import java.util.List;
  * email : dreamers_otw@163.com
  * date : 2018/5/14 16:38
  */
-@Service
+@Service("sysMenuService")
 public interface SysMenuService {
     Page<SysMenu> getMenuList(Integer pageNo, Integer pageSize);
     List<SysMenuData> getMenuTree(Integer userId);
