@@ -30,10 +30,9 @@ var vm = new Vue({
 	created: function() {
 		if(menuId != null){
 			this.title = "修改菜单";
-			this.getMenu(menuId)
-		} else {
-		    this.selectMenuType()
+			this.getMenu(menuId);
 		}
+        this.selectMenuType();
 		//加载菜单树
 		$.get("../sys/menu/getMenuTree", function(r) {
 			ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuTree);

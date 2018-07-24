@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.basic.backstage.sys.dao.SysRoleDao">
+    <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysRole">
+        <id column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+        <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+        <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+        <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    </resultMap>
+
+    <select id="getRoleListPage" parameterType="Integer" resultMap="BaseResultMap">
+        select * from sys_role order by create_time asc limit #{arg0},#{arg1}
+    </select>
+
+</mapper>

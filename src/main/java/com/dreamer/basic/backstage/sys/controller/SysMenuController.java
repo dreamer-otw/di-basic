@@ -80,7 +80,7 @@ public class SysMenuController extends AbstractController {
 
     @GetMapping("/menuInfo/{menuId}")
     @ResponseBody
-    public Result getMenuInfoByMenuId(@PathVariable("menuId") String menuId) {
+    public Result getMenuInfoByMenuId(@PathVariable("menuId") Integer menuId) {
         SysMenuData menuInfo = sysMenuService.getMenuInfoByMenuId(menuId);
         if (menuInfo != null) {
             Map<String, Object> retData = new HashMap<>();

@@ -21,5 +21,5 @@ public interface SysMenuService {
     int insertMenu(SysMenu sysMenu);
     int updateMenu(SysMenu sysMenu);
     int delMenu(String[] menuIds);
-    SysMenuData getMenuInfoByMenuId(String menuId);
+    SysMenuData getMenuInfoByMenuId(Integer menuId);
 }

@@ -133,7 +133,7 @@ public class DBUtils {
      */
     public <T> List<T> executeQueryByRef(String sql, List<Object> params,
                                          Class<T> cls) throws Exception {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         int index = 1;
         pstmt = con.prepareStatement(sql);
         if (params != null && !params.isEmpty()) {

@@ -18,14 +18,14 @@ $(function () {
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            root: "results",
+            page: "pageNo",
+            total: "pageSize",
+            records: "totalRecord"
         },
         prmNames : {
-            page:"page", 
-            rows:"limit", 
+            page:"pageNo",
+            rows:"pageSize",
             order: "order"
         },
         gridComplete:function(){
@@ -58,7 +58,7 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: "../sys/role/delete",
+				    url: "../sys/role/delRole",
 				    data: JSON.stringify(roleIds),
 				    success: function(r){
 						if(r.code == 0){

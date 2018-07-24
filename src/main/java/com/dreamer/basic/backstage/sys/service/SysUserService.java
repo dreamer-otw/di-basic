@@ -24,5 +24,10 @@ public interface SysUserService {
     SysUser getUserByUsername(String username);
     //分页list
     Page<SysUser> getUserList(Integer pageNo, Integer pageSize);
-
+    //del
+    int delUser(Integer[] userIds);
+    //更新
+    int updateUser(SysUser sysUser);
+    //新增
+    int saveUser(SysUser sysUser);
 }

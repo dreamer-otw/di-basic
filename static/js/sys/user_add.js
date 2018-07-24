@@ -20,17 +20,17 @@ var vm = new Vue({
     },
 	methods: {
 		getUser: function(userId){
-			$.get("../sys/user/info/"+userId, function(r){
-				vm.user = r.user;
+			$.get("../sys/user/userInfo/"+userId, function(r){
+				vm.user = r.userInfo;
 			});
 		},
 		getRoleList: function(){
-			$.get("../sys/role/select", function(r){
-				vm.roleList = r.list;
+			$.get("../sys/role/getRoleList", function(r){
+				vm.roleList = r.roleList;
 			});
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.user.userId == null ? "../sys/user/save" : "../sys/user/update";
+			var url = vm.user.userId == null ? "../sys/user/save" : "../sys/user/updateUser";
 			$.ajax({
 				type: "POST",
 			    url: url,

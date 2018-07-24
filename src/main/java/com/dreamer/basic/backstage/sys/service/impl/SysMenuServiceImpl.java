@@ -90,8 +90,8 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public SysMenuData getMenuInfoByMenuId(String menuId) {
-        return sysMenuDao.getMenuByMenuId(Integer.valueOf(menuId));
+    public SysMenuData getMenuInfoByMenuId(Integer menuId) {
+        return sysMenuDao.getMenuByMenuId(menuId);
     }
 
     /**

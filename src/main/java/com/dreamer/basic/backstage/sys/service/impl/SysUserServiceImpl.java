@@ -58,6 +58,34 @@ public class SysUserServiceImpl implements SysUserService{
 
     @Override
     public Page<SysUser> getUserList(Integer pageNo, Integer pageSize) {
-        return null;
+        long count = sysUserMapper.countByExample(null);
+        int startNum = (pageNo - 1) * pageSize;
+        int endNum = pageNo * pageSize - 1;
+        List<SysUser> menuList = sysUserDao.getUserList(startNum, endNum);
+        Page<SysUser> sysUserPage = new Page<>();
+        sysUserPage.setPageNo(pageNo);
+        sysUserPage.setPageSize(pageSize);
+        sysUserPage.setTotalRecord(count);
+        sysUserPage.setResults(menuList);
+        return sysUserPage;
+    }
+
+    @Override
+    public int delUser(Integer[] userIds) {
+        int num = 0;
+        for (Integer userId : userIds) {
+            num += sysUserMapper.deleteByPrimaryKey(userId);
+        }
+        return num;
+    }
+
+    @Override
+    public int updateUser(SysUser sysUser) {
+        return sysUserMapper.updateByPrimaryKey(sysUser);
+    }
+
+    @Override
+    public int saveUser(SysUser sysUser) {
+        return sysUserMapper.insert(sysUser);
     }
 }

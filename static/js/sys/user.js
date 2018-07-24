@@ -32,11 +32,11 @@ $(function () {
             total: "pageSize",
             records: "totalRecord"
         },
-        /*prmNames : {
-            page:"page", 
-            rows:"limit", 
+        prmNames : {
+            page:"pageNo",
+            rows:"pageSize",
             order: "order"
-        },*/
+        },
         gridComplete:function(){
         	//隐藏grid底部滚动条
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });
@@ -49,13 +49,12 @@ var vm = new Vue({
 	data:{
 		
 	},
-	methods:
+	methods:{
 		update: function (event) {
 			var userId = getSelectedRow();
 			if(userId == null){
 				return ;
 			}
-			
 			location.href = "user_add.html?userId="+userId;
 		},
 		del: function (event) {
@@ -63,11 +62,10 @@ var vm = new Vue({
 			if(userIds == null){
 				return ;
 			}
-			
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: "../sys/user/delete",
+				    url: "../sys/user/del",
 				    data: JSON.stringify(userIds),
 				    success: function(r){
 						if(r.code == 0){
