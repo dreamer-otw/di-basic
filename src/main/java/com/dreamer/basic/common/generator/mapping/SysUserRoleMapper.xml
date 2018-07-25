@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysUserRoleMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysUserRole">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,15 +81,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_user_role
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_user_role
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysUserRoleExample">
     delete from sys_user_role
@@ -100,7 +100,7 @@
   <insert id="insert" parameterType="com.dreamer.basic.common.generator.entity.SysUserRole">
     insert into sys_user_role (id, user_id, role_id
       )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dreamer.basic.common.generator.entity.SysUserRole">
@@ -118,13 +118,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null">
-        #{roleId,jdbcType=INTEGER},
+        #{roleId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -138,13 +138,13 @@
     update sys_user_role
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=INTEGER},
+        role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -153,9 +153,9 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_user_role
-    set id = #{record.id,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+    set id = #{record.id,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,18 +164,18 @@
     update sys_user_role
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null">
-        role_id = #{roleId,jdbcType=INTEGER},
+        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysUserRole">
     update sys_user_role
-    set user_id = #{userId,jdbcType=INTEGER},
-      role_id = #{roleId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    set user_id = #{userId,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

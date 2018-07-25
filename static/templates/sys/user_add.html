@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
 	<title>编辑管理员</title>
 	<#include "header.html">
@@ -9,10 +9,22 @@
 	<div class="panel-heading">{{title}}</div>
 	<form class="form-horizontal">
 		<div class="form-group">
+			<div class="col-sm-2 control-label">登录账号</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" v-model="user.userAccount" placeholder="登录账号"/>
+			</div>
+		</div>
+		<div class="form-group">
 		   	<div class="col-sm-2 control-label">用户名</div>
 		   	<div class="col-sm-10">
-		      <input type="text" class="form-control" v-model="user.username" placeholder="登录账号"/>
+		      <input type="text" class="form-control" v-model="user.username" placeholder="用户名"/>
 		    </div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-2 control-label">别名</div>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" v-model="user.userAlias" placeholder="别名"/>
+			</div>
 		</div>
 		<div class="form-group">
 		   	<div class="col-sm-2 control-label">密码</div>
@@ -36,7 +48,7 @@
 		   	<div class="col-sm-2 control-label">角色</div>
 		   	<div class="col-sm-10">
 			   	<label v-for="role in roleList" class="checkbox-inline">
-				  <input type="checkbox" :value="role.roleId" v-model="user.roleIdList">{{role.roleName}}
+				  <input type="checkbox" v-bind:value="role.roleId" v-model="user.roleIdList">{{role.roleName}}
 				</label>
 			</div>
 		</div>

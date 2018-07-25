@@ -3,7 +3,7 @@ package com.dreamer.basic.common.generator.entity;
 import java.io.Serializable;
 
 public class SysRole implements Serializable {
-    private Integer roleId;
+    private String roleId;
 
     private String roleName;
 
@@ -13,12 +13,12 @@ public class SysRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 
     public String getRoleName() {

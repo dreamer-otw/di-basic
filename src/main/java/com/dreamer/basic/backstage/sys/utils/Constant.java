@@ -40,5 +40,14 @@ public class Constant {
     /**
      * 超级管理员
      */
-    public static final Integer ROOT_USER = 0;
+    public static final String ROOT_USER = "000000";
+    /**
+     * 根菜单ID
+     */
+    public static final String ROOT_MENU = "000001";
+    /**
+     * 根菜单父ID
+     */
+    public static final String ROOT_MENU_PARENT = "000000";
+
 }

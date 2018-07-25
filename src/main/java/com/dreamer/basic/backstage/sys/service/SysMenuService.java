@@ -17,9 +17,9 @@ import java.util.List;
 @Service("sysMenuService")
 public interface SysMenuService {
     Page<SysMenu> getMenuList(Integer pageNo, Integer pageSize);
-    List<SysMenuData> getMenuTree(Integer userId);
+    List<SysMenuData> getMenuTree(String userId);
     int insertMenu(SysMenu sysMenu);
     int updateMenu(SysMenu sysMenu);
     int delMenu(String[] menuIds);
-    SysMenuData getMenuInfoByMenuId(Integer menuId);
+    SysMenuData getMenuInfoByMenuId(String menuId);
 }

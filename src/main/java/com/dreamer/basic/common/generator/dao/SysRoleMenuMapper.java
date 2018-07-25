@@ -10,7 +10,7 @@ public interface SysRoleMenuMapper {
 
     int deleteByExample(SysRoleMenuExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(SysRoleMenu record);
 
@@ -18,7 +18,7 @@ public interface SysRoleMenuMapper {
 
     List<SysRoleMenu> selectByExample(SysRoleMenuExample example);
 
-    SysRoleMenu selectByPrimaryKey(Integer id);
+    SysRoleMenu selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") SysRoleMenu record, @Param("example") SysRoleMenuExample example);
 

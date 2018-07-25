@@ -3,7 +3,7 @@ package com.dreamer.basic.common.generator.entity;
 import java.io.Serializable;
 
 public class SysUser implements Serializable {
-    private Integer userId;
+    private String userId;
 
     private String userAccount;
 
@@ -23,12 +23,12 @@ public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getUserAccount() {

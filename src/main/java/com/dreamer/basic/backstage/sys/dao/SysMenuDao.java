@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface SysMenuDao {
     List<SysMenu> getMenuList(Integer startNum, Integer endNum);
-    SysMenuData getMenuByMenuId(Integer menuId);
+    SysMenuData getMenuByMenuId(String menuId);
     List<SysMenuData> getMenuDataList();
 }

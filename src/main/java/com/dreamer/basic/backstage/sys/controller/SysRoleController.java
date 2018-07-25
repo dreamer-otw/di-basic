@@ -7,10 +7,7 @@ import com.dreamer.basic.backstage.sys.utils.Result;
 import com.dreamer.basic.common.generator.entity.SysRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,22 +44,36 @@ public class SysRoleController extends AbstractController{
     }
     @PostMapping("/save")
     @ResponseBody
-    public Result saveRole(SysRoleData sysRoleData) {
+    public Result saveRole(@RequestBody SysRoleData sysRoleData) {
         sysRoleService.saveRole(sysRoleData);
         return Result.ok("保存成功");
     }
 
-    @GetMapping("/delRole")
+    @PostMapping("/delRole")
     @ResponseBody
-    public Result delRole(Integer[] roleIds) {
-        return Result.ok();
+    public Result delRole(@RequestBody String[] roleIds) {
+        sysRoleService.delRole(roleIds);
+        return Result.ok("删除成功");
     }
 
     @GetMapping("/updateRole")
     @ResponseBody
-    public Result updateRole(SysRole sysRole) {
-        return Result.ok();
+    public Result updateRole(@RequestBody SysRoleData sysRoleData) {
+        sysRoleService.updateRole(sysRoleData);
+        return Result.ok("更新成功");
     }
+    @GetMapping("/roleInfo/{roleId}")
+    @ResponseBody
+    public Result getRoleInfo(@PathVariable("roleId") String roleId) {
+        SysRoleData roleInfo = sysRoleService.getRoleInfo(roleId);
+        if (roleInfo != null) {
+            Map<String, Object> retData = new HashMap<>();
+            retData.put("roleInfo", roleInfo);
+            return Result.ok(retData);
+        }
+        return Result.error();
+    }
+
 
 
 }

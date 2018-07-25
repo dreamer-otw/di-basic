@@ -17,5 +17,8 @@ import java.util.List;
 public interface SysRoleService {
     Page<SysRole> getRoleListPage(Integer pageNo, Integer pageSize);
     List<SysRole> getRoleList();
-    int saveRole(SysRoleData sysRoleData);
+    void saveRole(SysRoleData sysRoleData);
+    void updateRole(SysRoleData sysRoleData);
+    void delRole(String[] roleIds);
+    SysRoleData getRoleInfo(String roleId);
 }

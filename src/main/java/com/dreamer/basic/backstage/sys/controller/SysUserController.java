@@ -1,5 +1,6 @@
 package com.dreamer.basic.backstage.sys.controller;
 
+import com.dreamer.basic.backstage.sys.data.SysUserData;
 import com.dreamer.basic.backstage.sys.service.SysUserService;
 import com.dreamer.basic.backstage.sys.utils.Page;
 import com.dreamer.basic.backstage.sys.utils.Result;
@@ -24,7 +25,7 @@ public class SysUserController extends AbstractController {
     }
     @PostMapping("/del")
     @ResponseBody
-    public Result delMenu(@RequestBody Integer[] userIds) {
+    public Result delMenu(@RequestBody String[] userIds) {
         int num = sysUserService.delUser(userIds);
         if (num > 0) {
             return Result.ok("删除成功");
@@ -35,8 +36,8 @@ public class SysUserController extends AbstractController {
 
     @GetMapping("/userInfo/{userId}")
     @ResponseBody
-    public Result getMenuInfoByMenuId(@PathVariable("userId") Integer userId) {
-        SysUser userInfo = sysUserService.getUserById(userId);
+    public Result getMenuInfoByMenuId(@PathVariable("userId") String userId) {
+        SysUserData userInfo = sysUserService.getUserInfoById(userId);
         if (userInfo != null) {
             Map<String, Object> retData = new HashMap<>();
             retData.put("userInfo", userInfo);
@@ -46,23 +47,15 @@ public class SysUserController extends AbstractController {
     }
     @PostMapping("/updateUser")
     @ResponseBody
-    public Result updateUser(SysUser sysUser) {
-        int num = sysUserService.updateUser(sysUser);
-        if (num > 0) {
-            return Result.ok("修改成功");
-        } else {
-            return Result.error("修改失败");
-        }
+    public Result updateUser(@RequestBody SysUserData sysUserData) {
+        sysUserService.updateUser(sysUserData);
+        return Result.ok("修改成功");
     }
     @PostMapping("/save")
     @ResponseBody
-    public Result saveUser(SysUser sysUser) {
-        int num = sysUserService.updateUser(sysUser);
-        if (num > 0) {
-            return Result.ok("新增成功");
-        } else {
-            return Result.error("新增失败");
-        }
+    public Result saveUser(@RequestBody SysUserData sysUserData) {
+        sysUserService.saveUser(sysUserData);
+        return Result.ok("新增成功");
     }
 
 }

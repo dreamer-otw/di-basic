@@ -3,9 +3,9 @@ package com.dreamer.basic.common.generator.entity;
 import java.io.Serializable;
 
 public class SysMenu implements Serializable {
-    private Integer menuId;
+    private String menuId;
 
-    private Integer parentId;
+    private String parentId;
 
     private String menuName;
 
@@ -21,20 +21,20 @@ public class SysMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getMenuId() {
+    public String getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
+    public void setMenuId(String menuId) {
+        this.menuId = menuId == null ? null : menuId.trim();
     }
 
-    public Integer getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
+    public void setParentId(String parentId) {
+        this.parentId = parentId == null ? null : parentId.trim();
     }
 
     public String getMenuName() {

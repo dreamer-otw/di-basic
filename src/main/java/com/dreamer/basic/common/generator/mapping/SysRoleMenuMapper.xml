@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysRoleMenuMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysRoleMenu">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="role_id" jdbcType="INTEGER" property="roleId" />
-    <result column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="menu_id" jdbcType="VARCHAR" property="menuId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,15 +81,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_role_menu
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_role_menu
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysRoleMenuExample">
     delete from sys_role_menu
@@ -100,7 +100,7 @@
   <insert id="insert" parameterType="com.dreamer.basic.common.generator.entity.SysRoleMenu">
     insert into sys_role_menu (id, role_id, menu_id
       )
-    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER}
+    values (#{id,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dreamer.basic.common.generator.entity.SysRoleMenu">
@@ -118,13 +118,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="roleId != null">
-        #{roleId,jdbcType=INTEGER},
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="menuId != null">
-        #{menuId,jdbcType=INTEGER},
+        #{menuId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -138,13 +138,13 @@
     update sys_role_menu
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=INTEGER},
+        role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
       <if test="record.menuId != null">
-        menu_id = #{record.menuId,jdbcType=INTEGER},
+        menu_id = #{record.menuId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -153,9 +153,9 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_role_menu
-    set id = #{record.id,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER},
-      menu_id = #{record.menuId,jdbcType=INTEGER}
+    set id = #{record.id,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
+      menu_id = #{record.menuId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,18 +164,18 @@
     update sys_role_menu
     <set>
       <if test="roleId != null">
-        role_id = #{roleId,jdbcType=INTEGER},
+        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="menuId != null">
-        menu_id = #{menuId,jdbcType=INTEGER},
+        menu_id = #{menuId,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysRoleMenu">
     update sys_role_menu
-    set role_id = #{roleId,jdbcType=INTEGER},
-      menu_id = #{menuId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      menu_id = #{menuId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

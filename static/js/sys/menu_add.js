@@ -4,7 +4,7 @@ var setting = {
 			enable: true,
 			idKey: "menuId",
 			pIdKey: "parentId",
-			rootPId: -1
+			rootPId: "000000"
 		},
 		key: {
 			url:"nourl",
@@ -22,7 +22,7 @@ var vm = new Vue({
 		title:"新增菜单",
 		menu:{
 			parentName:"",
-			parentId:-1,
+			parentId:"000000",
 			menuType:0,
 			orderNum:0
 		}

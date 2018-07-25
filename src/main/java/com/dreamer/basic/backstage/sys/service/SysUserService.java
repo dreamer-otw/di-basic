@@ -1,5 +1,6 @@
 package com.dreamer.basic.backstage.sys.service;
 
+import com.dreamer.basic.backstage.sys.data.SysUserData;
 import com.dreamer.basic.backstage.sys.utils.Page;
 import com.dreamer.basic.common.generator.entity.SysUser;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 public interface SysUserService {
     //根据userId查询用户信息
-    SysUser getUserById(int userId);
+    SysUserData getUserInfoById(String userId);
 
     //根据userAccount查询用户信息
     SysUser getUserByAccount(String userAccount);
@@ -25,9 +26,9 @@ public interface SysUserService {
     //分页list
     Page<SysUser> getUserList(Integer pageNo, Integer pageSize);
     //del
-    int delUser(Integer[] userIds);
+    int delUser(String[] userIds);
     //更新
-    int updateUser(SysUser sysUser);
+    void updateUser(SysUserData sysUserData);
     //新增
-    int saveUser(SysUser sysUser);
+    void saveUser(SysUserData sysUserData);
 }

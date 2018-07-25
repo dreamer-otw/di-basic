@@ -20,10 +20,10 @@
         ) where rn &gt;= #{arg0}
     </select>-->
     <!-- mysql -->
-    <select id="getMenuList" parameterType="Integer" resultMap="BaseResultMap">
+    <select id="getMenuList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select * from sys_menu order by MENU_TYPE,ORDER_NUM asc limit #{arg0},#{arg1}
     </select>
-    <select id="getMenuByMenuId" parameterType="Integer" resultMap="BaseResultMap">
+    <select id="getMenuByMenuId" parameterType="String" resultMap="BaseResultMap">
         select A.*,
             if(A.parent_id = -1,
                 '根目录',
@@ -32,7 +32,7 @@
         from sys_menu A
         where A.menu_id = #{menuId}
     </select>
-    <select id="getMenuDataList" parameterType="Integer" resultMap="BaseResultMap">
+    <select id="getMenuDataList" resultMap="BaseResultMap">
         select A.*,
             if(A.parent_id = -1,
                 '根目录',

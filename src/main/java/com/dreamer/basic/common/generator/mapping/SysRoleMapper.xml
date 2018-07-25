@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysRoleMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysRole">
-    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="create_time" jdbcType="VARCHAR" property="createTime" />
@@ -82,15 +82,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_role
-    where role_id = #{roleId,jdbcType=INTEGER}
+    where role_id = #{roleId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_role
-    where role_id = #{roleId,jdbcType=INTEGER}
+    where role_id = #{roleId,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysRoleExample">
     delete from sys_role
@@ -101,7 +101,7 @@
   <insert id="insert" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
     insert into sys_role (role_id, role_name, remark, 
       create_time)
-    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
@@ -122,7 +122,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
-        #{roleId,jdbcType=INTEGER},
+        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="roleName != null">
         #{roleName,jdbcType=VARCHAR},
@@ -145,7 +145,7 @@
     update sys_role
     <set>
       <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=INTEGER},
+        role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
       <if test="record.roleName != null">
         role_name = #{record.roleName,jdbcType=VARCHAR},
@@ -163,7 +163,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_role
-    set role_id = #{record.roleId,jdbcType=INTEGER},
+    set role_id = #{record.roleId,jdbcType=VARCHAR},
       role_name = #{record.roleName,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=VARCHAR}
@@ -184,13 +184,13 @@
         create_time = #{createTime,jdbcType=VARCHAR},
       </if>
     </set>
-    where role_id = #{roleId,jdbcType=INTEGER}
+    where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysRole">
     update sys_role
     set role_name = #{roleName,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR}
-    where role_id = #{roleId,jdbcType=INTEGER}
+    where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
 </mapper>

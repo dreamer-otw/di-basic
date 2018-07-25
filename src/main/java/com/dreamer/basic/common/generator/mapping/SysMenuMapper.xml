@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamer.basic.common.generator.dao.SysMenuMapper">
   <resultMap id="BaseResultMap" type="com.dreamer.basic.common.generator.entity.SysMenu">
-    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
     <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
     <result column="menu_type" jdbcType="INTEGER" property="menuType" />
@@ -86,15 +86,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_menu
-    where menu_id = #{menuId,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_menu
-    where menu_id = #{menuId,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.dreamer.basic.common.generator.entity.SysMenuExample">
     delete from sys_menu
@@ -106,7 +106,7 @@
     insert into sys_menu (menu_id, parent_id, menu_name, 
       menu_url, menu_type, icon, 
       order_num, perms)
-    values (#{menuId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, 
+    values (#{menuId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
       #{menuUrl,jdbcType=VARCHAR}, #{menuType,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
       #{orderNum,jdbcType=INTEGER}, #{perms,jdbcType=VARCHAR})
   </insert>
@@ -140,10 +140,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="menuId != null">
-        #{menuId,jdbcType=INTEGER},
+        #{menuId,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null">
-        #{parentId,jdbcType=INTEGER},
+        #{parentId,jdbcType=VARCHAR},
       </if>
       <if test="menuName != null">
         #{menuName,jdbcType=VARCHAR},
@@ -175,10 +175,10 @@
     update sys_menu
     <set>
       <if test="record.menuId != null">
-        menu_id = #{record.menuId,jdbcType=INTEGER},
+        menu_id = #{record.menuId,jdbcType=VARCHAR},
       </if>
       <if test="record.parentId != null">
-        parent_id = #{record.parentId,jdbcType=INTEGER},
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
       </if>
       <if test="record.menuName != null">
         menu_name = #{record.menuName,jdbcType=VARCHAR},
@@ -205,8 +205,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_menu
-    set menu_id = #{record.menuId,jdbcType=INTEGER},
-      parent_id = #{record.parentId,jdbcType=INTEGER},
+    set menu_id = #{record.menuId,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=VARCHAR},
       menu_name = #{record.menuName,jdbcType=VARCHAR},
       menu_url = #{record.menuUrl,jdbcType=VARCHAR},
       menu_type = #{record.menuType,jdbcType=INTEGER},
@@ -221,7 +221,7 @@
     update sys_menu
     <set>
       <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=INTEGER},
+        parent_id = #{parentId,jdbcType=VARCHAR},
       </if>
       <if test="menuName != null">
         menu_name = #{menuName,jdbcType=VARCHAR},
@@ -242,17 +242,17 @@
         perms = #{perms,jdbcType=VARCHAR},
       </if>
     </set>
-    where menu_id = #{menuId,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dreamer.basic.common.generator.entity.SysMenu">
     update sys_menu
-    set parent_id = #{parentId,jdbcType=INTEGER},
+    set parent_id = #{parentId,jdbcType=VARCHAR},
       menu_name = #{menuName,jdbcType=VARCHAR},
       menu_url = #{menuUrl,jdbcType=VARCHAR},
       menu_type = #{menuType,jdbcType=INTEGER},
       icon = #{icon,jdbcType=VARCHAR},
       order_num = #{orderNum,jdbcType=INTEGER},
       perms = #{perms,jdbcType=VARCHAR}
-    where menu_id = #{menuId,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -12,13 +12,13 @@ import java.util.List;
  * @date : 2018/07/24 17:47
  */
 public class SysRoleData extends SysRole {
-    List<Integer> menuIdList;
+    List<String> menuIdList;
 
-    public List<Integer> getMenuIdList() {
+    public List<String> getMenuIdList() {
         return menuIdList;
     }
 
-    public void setMenuIdList(List<Integer> menuIdList) {
+    public void setMenuIdList(List<String> menuIdList) {
         this.menuIdList = menuIdList;
     }
 }

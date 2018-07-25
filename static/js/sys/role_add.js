@@ -4,7 +4,7 @@ var setting = {
 			enable: true,
 			idKey: "menuId",
 			pIdKey: "parentId",
-			rootPId: -1
+			rootPId: "000000"
 		},
 		key: {
 			url:"nourl",
@@ -41,8 +41,8 @@ var vm = new Vue({
     },
 	methods: {
 		getRole: function(roleId){
-            $.get("../sys/role/info/"+roleId, function(r){
-            	vm.role = r.role;
+            $.get("../sys/role/roleInfo/"+roleId, function(r){
+            	vm.role = r.roleInfo;
                 
                 //勾选角色所拥有的菜单
     			var menuIds = vm.role.menuIdList;
