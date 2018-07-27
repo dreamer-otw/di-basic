@@ -12,6 +12,7 @@ import com.dreamer.basic.common.generator.entity.SysUserExample;
 import com.dreamer.basic.common.generator.entity.SysUserRole;
 import com.dreamer.basic.common.generator.entity.SysUserRoleExample;
 import com.dreamer.basic.common.util.DateUtil;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -121,7 +122,7 @@ public class SysUserServiceImpl implements SysUserService{
         SysUser sysUser = new SysUser();
         sysUser.setUserId(sysUserData.getUserId());
         sysUser.setUserAccount(sysUserData.getUserAccount());
-        sysUser.setUserPwd(sysUserData.getUserPwd());
+        sysUser.setUserPwd(new Sha256Hash(sysUserData.getUserPwd()).toHex());
         sysUser.setUsername(sysUserData.getUsername());
         sysUser.setUserAlias(sysUserData.getUserAlias());
         sysUser.setEmail(sysUserData.getEmail());
@@ -144,7 +145,7 @@ public class SysUserServiceImpl implements SysUserService{
         SysUser sysUser = new SysUser();
         sysUser.setUserId(userId);
         sysUser.setUserAccount(sysUserData.getUserAccount());
-        sysUser.setUserPwd(sysUserData.getUserPwd());
+        sysUser.setUserPwd(new Sha256Hash(sysUserData.getUserPwd()).toHex());
         sysUser.setUsername(sysUserData.getUsername());
         sysUser.setUserAlias(sysUserData.getUserAlias());
         sysUser.setEmail(sysUserData.getEmail());

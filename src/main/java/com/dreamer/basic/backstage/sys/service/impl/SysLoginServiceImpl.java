@@ -51,7 +51,7 @@ public class SysLoginServiceImpl implements SysLoginService {
             SysUserRoleExample sysUserRoleExample = new SysUserRoleExample();
             sysUserRoleExample.createCriteria().andUserIdIsNotNull().andUserIdEqualTo(userId);
             List<SysUserRole> sysUserRoles = sysUserRoleMapper.selectByExample(sysUserRoleExample);
-            List<String> menuIdList = null;
+            List<String> menuIdList = new ArrayList<>();
             for (SysUserRole sysUserRole : sysUserRoles) {
                 SysRoleMenuExample sysRoleMenuExample = new SysRoleMenuExample();
                 sysRoleMenuExample.createCriteria().andRoleIdIsNotNull().andRoleIdEqualTo(sysUserRole.getRoleId());
