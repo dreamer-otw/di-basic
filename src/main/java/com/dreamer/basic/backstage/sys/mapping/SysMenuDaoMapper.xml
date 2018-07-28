@@ -21,24 +21,37 @@
     </select>-->
     <!-- mysql -->
     <select id="getMenuList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select * from sys_menu order by MENU_TYPE,ORDER_NUM asc limit #{arg0},#{arg1}
+        select menu.*,parentMenu.menu_name as parentName
+        from sys_menu menu
+        left join sys_menu parentMenu
+        on menu.parent_id = parentMenu.menu_id
+        order by menu.menu_type,menu.order_num asc
+        limit #{arg0},#{arg1}
     </select>
     <select id="getMenuByMenuId" parameterType="String" resultMap="BaseResultMap">
         select A.*,
-            if(A.parent_id = -1,
+            if(A.parent_id = '000000',
                 '根目录',
                 (select menu_name from sys_menu where menu_id = A.parent_id)
             ) as parent_name
         from sys_menu A
         where A.menu_id = #{menuId}
+        order by A.menu_type, A.order_num asc;
     </select>
     <select id="getMenuDataList" resultMap="BaseResultMap">
-        select A.*,
-            if(A.parent_id = -1,
-                '根目录',
-                (select menu_name from sys_menu where menu_id = A.parent_id)
-            ) as parent_name
-        from sys_menu A
+        SELECT
+        A.*,
+        IF(A.parent_id = '000000',
+        '根目录',
+        (SELECT
+        menu_name
+        FROM
+        sys_menu
+        WHERE
+        menu_id = A.parent_id)) AS parent_name
+        FROM
+        sys_menu A
+        ORDER BY A.menu_type, A.order_num asc
     </select>
 
 

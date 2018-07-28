@@ -54,7 +54,7 @@ public class SysUserServiceImpl implements SysUserService{
         sysUserData.setUserAccount(sysUser.getUserAccount());
         sysUserData.setUsername(sysUser.getUsername());
         sysUserData.setUserAlias(sysUser.getUserAlias());
-        sysUserData.setUserPwd(sysUser.getUserPwd());
+//        sysUserData.setUserPwd(sysUser.getUserPwd());
         sysUserData.setEmail(sysUser.getEmail());
         sysUserData.setMobile(sysUser.getMobile());
         sysUserData.setCreateTime(sysUser.getCreateTime());
@@ -122,7 +122,10 @@ public class SysUserServiceImpl implements SysUserService{
         SysUser sysUser = new SysUser();
         sysUser.setUserId(sysUserData.getUserId());
         sysUser.setUserAccount(sysUserData.getUserAccount());
-        sysUser.setUserPwd(new Sha256Hash(sysUserData.getUserPwd()).toHex());
+        if (sysUserData.getUserPwd() != null &&
+                !sysUserData.getUserPwd().isEmpty()) {
+            sysUser.setUserPwd(new Sha256Hash(sysUserData.getUserPwd()).toHex());
+        }
         sysUser.setUsername(sysUserData.getUsername());
         sysUser.setUserAlias(sysUserData.getUserAlias());
         sysUser.setEmail(sysUserData.getEmail());

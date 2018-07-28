@@ -23,7 +23,8 @@
     </select>-->
     <!-- mysql -->
     <select id="getUserList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select * from sys_user where user_id &lt;&gt; '000000' order by user_id asc limit #{arg0},#{arg1}
+        select user_id,user_account,username,user_alias,email,mobile,user_status,create_time
+        from sys_user where user_id &lt;&gt; '000000' order by user_id asc limit #{arg0},#{arg1}
     </select>
 
 

@@ -5,7 +5,7 @@ $(function () {
         colModel: [			
 			{ label: '用户ID', name: 'userId', width: 45,hidden: true,key: true },
 			{ label: '登录帐号', name: 'userAccount', width: 75 },
-			{ label: '登录密码', name: 'userPwd', width: 75 },
+//			{ label: '登录密码', name: 'userPwd', width: 75 },
 			{ label: '用户名', name: 'username', width: 75 },
 			{ label: '别名', name: 'userAlias', width: 75 },
 			{ label: '邮箱', name: 'email', width: 90 },
